@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地震學與地球結構：第三章互動學習網</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --sidebar-width: 280px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", "Microsoft JhengHei", sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            display: flex;
+        }
+
+        /* 側邊導覽列設計 */
+        nav {
+            width: var(--sidebar-width);
+            background-color: var(--primary-color);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        nav h1 {
+            font-size: 1.4rem;
+            text-align: center;
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 15px 25px;
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background-color: var(--secondary-color);
+            color: white;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        /* 主內容區設計 */
+        main {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+        }
+
+        section {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        h2.section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        /* 圖片卡片設計 */
+        .image-card {
+            background: #f1f2f6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .image-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-card img:hover {
+            transform: scale(1.03);
+        }
+
+        .caption {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: var(--secondary-color);
+            text-align: left;
+            background: #fff;
+            padding: 15px;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 4px;
+        }
+
+        /* 螢幕適應 */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            nav {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            main {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h1>🌍 地震學第三章<br><span style="font-size: 1rem; color: #bdc3c7;">地球結構與震波探勘</span></h1>
+        <ul id="nav-links">
+            <li><a href="#sec-3-1" class="active">3.1 簡介 (Introduction)</a></li>
+            <li><a href="#sec-3-2">3.2 折射震測 (Refraction Seismology)</a></li>
+            <li><a href="#sec-3-3">3.3 反射震測 (Reflection Seismology)</a></li>
+            <li><a href="#sec-3-4">3.4 球形地球中的地震波</a></li>
+            <li><a href="#sec-3-5">3.5 體波走時研究</a></li>
+            <li><a href="#sec-3-6">3.6 非均向性地球結構</a></li>
+            <li><a href="#sec-3-7">3.7 衰減與非彈性 (Attenuation)</a></li>
+            <li><a href="#sec-3-8">3.8 地函與地核的成分</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <header>
+            <h2>地震學與地球內部結構</h2>
+            <p>透過地震波，我們能為地球做一次深度的「超音波掃描」</p>
+        </header>
+
+        <section id="sec-3-1">
+            <h2 class="section-title">3.1 簡介 (Introduction)</h2>
+            <p>地球的半徑有六千多公里，但人類鑽過最深的井也只有十幾公里，我們該如何知道地球內部有地函、液態外核和固態內核呢？答案就是<strong>「地震波」</strong>。</p>
+            <p>地震學是了解地球內部構造最強大的工具。當地震發生時，震波穿透地球內部，速度與路徑會因為介質的密度和彈性模量改變。藉由分析在地球表面接收到的地震紀錄（Seismograms），我們就能像醫生看超音波一樣，反演出地球內部的三維構造。</p>
+        </section>
+
+        <section id="sec-3-2">
+            <h2 class="section-title">3.2 折射震測 (Refraction Seismology)</h2>
+            <p>折射震測利用了光學中著名的「司乃耳定律 (Snell's Law)」。當波從低速層進入高速層時，若入射角達到臨界角，就會產生沿著介面傳播的「首波 (Head Wave)」。我們在地表記錄這些首波，就能計算出地下地層的深度與速度。</p>
+
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.2-1.png" alt="折射與走時曲線圖">
+                <div class="caption">
+                    <strong>【圖 1】水平雙層介質的走時曲線：</strong><br>
+                    這張圖是折射震測的核心觀念。圖中顯示了三種波的到達時間(走時)與距離的關係：<br>
+                    1. <strong>直達波 (Direct wave)：</strong> 在第一層傳遞，走時曲線是一條通過原點的斜線，斜率為 1/v0。<br>
+                    2. <strong>反射波 (Reflection)：</strong> 呈現雙曲線型態，在近距離總是比首波晚到。<br>
+                    3. <strong>首波(折射波/Head wave)：</strong> 在臨界距離 (xc) 之後出現。因為它在第二層(高速層 v1)中趕路，雖然路徑較長，但在<strong>交截距離 (Crossover distance)</strong>之後，它會超越直達波，成為地震儀第一個記錄到的訊號！工程師常利用交截時間 (Intercept time) 來推算地層深度。
+                </div>
+            </div>
+
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.2-4.png" alt="隱藏層與低速層走時曲線">
+                <div class="caption">
+                    <strong>【圖 3】隱藏層 (Hidden Layer) 或低速層的影響：</strong><br>
+                    大自然並不總是完美的遞增速度。如果地層中夾著一層速度較低的地層 (低速層)，或者某個地層太薄，折射波可能永遠無法成為「最先到達」的波。在走時曲線上，這會導致我們「漏算」這一層，這就是著名的隱藏層問題。這提醒我們單靠初達波來反演構造有時會有盲點。
+                </div>
+            </div>
+
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.2-5.png" alt="實際折射記錄剖面">
+                <div class="caption">
+                    <strong>【圖 4】折射記錄剖面 (Record Section) 實例：</strong><br>
+                    這是將多個地震儀記錄到的波形，依照距離遠近排列起來的真實剖面。你可以清楚看到，隨著距離增加，不同相位 (如 Pg 代表地殼直達波，Pn 代表在莫氏不連續面折射的首波) 排列成的傾斜直線。斜率的倒數就是該層的地層速度！
+                </div>
+            </div>
+
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.2-19.png" alt="複雜地殼構造與折射">
+                <div class="caption">
+                    <strong>【圖 2】地殼與上部地函的複雜構造：</strong><br>
+                    真實的地殼底部 (莫氏不連續面, Moho) 並非平坦的，速度也可能因為岩石種類變化而有水平方向的差異。利用複雜的震波折射追跡 (Ray tracing)，我們可以繪製出如圖中這種帶有起伏的 2D 或 3D 構造剖面，這對於尋找石油或了解板塊構造極度重要。
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-3-3">
+            <h2 class="section-title">3.3 反射震測 (Reflection Seismology)</h2>
+            <p>與折射關注「初達波」不同，反射震測關注從地層介面「反彈回來」的波。反射震測擁有極高的解析度，是石油與天然氣探勘行業的命脈。藉由多重覆蓋 (CMP stacking) 和偏移 (Migration) 等訊號處理技術，我們可以把雜亂的反射波形轉化為無比清晰的地下地質影像，甚至能看見古老的斷層和河道。</p>
+        </section>
+
+        <section id="sec-3-4">
+            <h2 class="section-title">3.4 球形地球中的地震波 (Seismic waves in a spherical earth)</h2>
+            <p>當我們把視角拉大到全球尺度時，地球必須被視為一個球體，地層也不再是平的。此時我們用<strong>射線參數 (Ray parameter, p)</strong> 來取代平面介質的 Snell 定律。由於地球深部壓力大，通常速度較快，所以地震射線在地球內部會呈現Ｕ字形的彎曲路徑向上折返。</p>
+
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.4-5.png" alt="球形地球中的射線彎曲">
+                <div class="caption">
+                    <strong>【圖 5】球形地球中連續增加的速度結構：</strong><br>
+                    左圖顯示，當地球內部速度隨深度連續增加時，震波的射線路徑會平滑地向下彎曲後折返回地表。右圖對應的走時曲線 (Travel-time curve) 則是一條平滑、斜率隨距離逐漸變緩的曲線，這反映了波穿過了深部較快的區域。
+                </div>
+            </div>
+
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.4-6.png" alt="地核陰影區">
+                <div class="caption">
+                    <strong>【圖 6】速度劇變與「陰影區 (Shadow Zone)」：</strong><br>
+                    如果地球內部存在一個「速度突然下降」的區域（最經典的例子就是固態地函進入液態外核），射線會向法線方向劇烈折射，導致某一段距離區間內完全接收不到某種地震波。這就是著名的震波陰影區，也是人類當年證實液態地核存在的鐵證！此外，圖中也顯示了速度急劇增加時可能產生的三重走時 (Triplication) 現象。
+                </div>
+            </div>
+
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.4-7.png" alt="射線參數關係圖">
+                <div class="caption">
+                    <strong>【圖 7】走時 T 與距離 Δ 的微分關係：</strong><br>
+                    這是一張極為優雅的數學幾何圖解。在走時曲線 T(Δ) 上，每一點的斜率 (dT/dΔ) 正好等於該射線的<strong>射線參數 (p)</strong>。這意味著我們只要測量地表走時曲線的切線斜率，就能得知這條震波在地球最深處 (轉折點) 的速度特徵。這引出了地震學中強大的反演工具：Tau-p 轉換。
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-3-5">
+            <h2 class="section-title">3.5 體波走時研究 (Body wave travel time studies)</h2>
+            <p>收集全球地震觀測網的資料，地震學家建立了標準地球速度模型，例如早期的 JB 模型與現代廣泛使用的 IASP91 與 AK135 模型。藉由比較實際測量到的時間與模型的理論時間（即計算殘差），我們進一步發現地球不是完美的同心圓。</p>
+
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.5-1.png" alt="JB與IASP91速度模型">
+                <div class="caption">
+                    <strong>【圖 8】JB 與 IASP91 速度模型比較：</strong><br>
+                    此圖展示了 P 波和 S 波速度隨深度的變化。你可以清楚看到在 2900 公里深處（核幔邊界），P 波速度驟降，而 S 波速度直接歸零（因為 S 波無法穿透液體）。較新的 IASP91 模型在地函過渡帶（約 410-660 km）的解析度更好，這是現代電腦運算結合巨量資料的成果。
+                </div>
+            </div>
+
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.5-2.png" alt="震相命名原則">
+                <div class="caption">
+                    <strong>【圖 9】地震波的「身分證」— 震相命名 (Phase Nomenclature)：</strong><br>
+                    因為地球內部有不同圈層，震波會產生各種反射與折射。我們用英文字母組合來幫它們命名。例如大寫 P, S 代表在地函中走 P 波或 S 波；小寫 c 代表在核幔邊界反射 (如 PcP)；大寫 K 代表穿透外核的 P 波 (如 PKP)。這套語言幫助工程師一眼看穿波的履歷！
+                </div>
+            </div>
+
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.5-3.png" alt="全身體波走時資料">
+                <div class="caption">
+                    <strong>【圖 10】全球海量震波走時資料圖：</strong><br>
+                    圖中密密麻麻的點是全世界成千上萬個地震儀收集到的實際波相到達時間。儘管資料看似散亂，但神奇的是，它們最終收斂成了幾條極其清晰的曲線！這就是科學之美，證明了地球內部確實具有高度的一維同心層狀對稱性。
+                </div>
+            </div>
+
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.5-5.png" alt="走時殘差異常">
+                <div class="caption">
+                    <strong>【圖 11】走時殘差 (Travel-time Residuals)：</strong><br>
+                    當我們把「實際觀測時間」減去「標準模型預測時間」，得到的就是殘差。如果殘差為負，代表波提早到了，說明地下有較冷、較硬的高速異常體（如隱沒板塊）；如果殘差為正，則可能有較熱、部分熔融的低速異常體（如熱柱）。這是尋找 3D 地球構造的關鍵鑰匙。
+                </div>
+            </div>
+
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.5-12.png" alt="地震層析成像">
+                <div class="caption">
+                    <strong>【圖 12】地震層析成像 (Seismic Tomography)：</strong><br>
+                    把上述的「走時殘差」資料結合逆推演算法，我們就能得到這種類似醫學「CT 掃描」的三維影像。圖中冷色調 (藍) 代表地震波速較快，通常是冰冷的隱沒板塊；暖色調 (紅) 代表速度較慢，可能是地函熱柱 (Mantle plume)。這讓我們真的「看見」了地球內部的對流！
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-3-6">
+            <h2 class="section-title">3.6 非均向性地球結構 (Anisotropic earth structure)</h2>
+            <p>傳統上我們假設地球內部岩石是「均向性」的（各個方向性質都一樣）。但實際上，由於板塊運動與地函對流造成的強烈剪切應力，會使得岩石中的礦物（如橄欖石）沿著流動方向整齊排列。這會導致地震波順著礦物排列方向走得快，垂直方向走得慢，這現象稱為<strong>非均向性 (Anisotropy)</strong>。最明顯的證據就是 S 波分裂 (S-wave splitting) 現象。</p>
+        </section>
+
+        <section id="sec-3-7">
+            <h2 class="section-title">3.7 衰減與非彈性 (Attenuation and anelasticity)</h2>
+            <p>為什麼遠處的地震感覺起來總是「搖很久且很柔和」，近處的地震卻是「瞬間劇烈震動」？這是因為地震波在傳播時能量會被消耗。我們用<strong>品質因子 (Quality Factor, Q)</strong> 來衡量，Q 值越大代表介質越純粹彈性、波傳得越遠；Q 值越小則代表衰減嚴重。</p>
+
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.7-1.png" alt="衰減機制">
+                <div class="caption">
+                    <strong>【圖 13】振幅衰減機制比較：</strong><br>
+                    地震波變弱有幾個原因：第一是「幾何擴散 (Geometric spreading)」，就像手電筒照越遠光越散；第二是「散射 (Scattering)」，遇到破裂帶波被彈開；第三才是真正的「內在衰減 (Intrinsic attenuation)」，岩石分子摩擦將彈性波的能量轉化為了微小的熱能。
+                </div>
+            </div>
+
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.7-3.png" alt="頻率與衰減">
+                <div class="caption">
+                    <strong>【圖 14】頻率相依的衰減效應：</strong><br>
+                    大自然是一個絕佳的「低通濾波器」。圖中展示了地震波衰減與頻率的關係：<strong>高頻率的波衰減得遠比低頻率快！</strong>因此，在距離震央極遠的測站，高頻的刺耳震動早就被吸收殆盡，留下來被地震儀記錄到的，多半是低頻、長週期的平緩波動。
+                </div>
+            </div>
+
+            <div class="image-card">
+                <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.7-5.png" alt="Q值與深度變化">
+                <div class="caption">
+                    <strong>【圖 15】地球內部的 Q 值 (品質因子) 分布：</strong><br>
+                    這張圖繪製了地球內部 Q 值隨深度的變化。你可以注意到，在較淺的「軟流圈」(Asthenosphere) 中，Q 值異常的低（代表衰減極強）。這與軟流圈高溫、部分熔融、呈現塑性流動的物理特性完美吻合。波經過這裡就像在泥漿裡跑步一樣，能量消耗極大！
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-3-8">
+            <h2 class="section-title">3.8 地函與地核的成分 (Composition of the mantle and the core)</h2>
+            <p>總結來說，地震學不只給我們速度，結合高壓礦物物理學與宇宙化學，它解答了地球的組成：上部地函主要由橄欖岩 (Peridotite) 組成；在 410km 與 660km 深處的速度躍升，其實是礦物在高壓下發生的「相變 (Phase transition)」；而那無法傳遞 S 波的外核，則是由液態的鐵鎳合金所構成。地震學，真正為我們解開了地球深處的密碼。</p>
+        </section>
+
+    </main>
+
+    <script>
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('#nav-links li a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                // 當滾動超過該區塊頂部一點點時判定為進入該區塊
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // 平滑滾動功能
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
