@@ -1,486 +1,559 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
+<!doctype html>
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>第三章：地震學與地球結構 - 互動學習網</title>
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --bg-color: #f8f9fa;
-            --text-color: #333;
-            --card-bg: #fff;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, '微軟正黑體';
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        /* 頂部橫幅 */
-        header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-
-        /* 導覽列 */
-        nav {
-            background-color: var(--primary-color);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 10px 0;
-        }
-
-        nav ul li {
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: var(--secondary-color);
-        }
-
-        /* 主要內容區 */
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        section {
-            background: var(--card-bg);
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            scroll-margin-top: 70px;
-        }
-
-        section h2 {
-            color: var(--primary-color);
-            border-bottom: 3px solid var(--secondary-color);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        p {
-            margin-bottom: 15px;
-            font-size: 1.05em;
-        }
-
-        /* 圖片網格與卡片設計 */
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .img-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            background: #fafafa;
-        }
-
-        .img-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .img-container {
-            width: 100%;
-            height: 250px;
-            overflow: hidden;
-            cursor: pointer;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            transition: transform 0.3s;
-        }
-
-        .img-card:hover .img-container img {
-            transform: scale(1.05);
-        }
-
-        .img-desc {
-            padding: 15px;
-        }
-
-        .img-desc h4 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-
-        .img-desc p {
-            font-size: 0.95em;
-            color: #555;
-            margin: 0;
-        }
-
-        /* 互動式圖片放大 (Lightbox) */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        .lightbox img {
-            max-width: 90%;
-            max-height: 80%;
-            border-radius: 5px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-
-        .lightbox .caption {
-            color: white;
-            margin-top: 15px;
-            font-size: 1.2em;
-            text-align: center;
-            max-width: 80%;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 40px;
-            cursor: pointer;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: var(--primary-color);
-            color: white;
-            margin-top: 40px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>地震學第三章｜地震學與地球構造互動式學習網頁</title>
+  <meta name="description" content="Seismology Chapter 3 interactive learning site: Seismology and Earth Structure, with refraction, reflection, spherical Earth rays, body-wave phases, anisotropy, attenuation, mantle-core composition, and record-section reading." />
+  <style>
+    :root{
+      --bg:#f6f1e8;
+      --bg2:#efe2cf;
+      --ink:#1d211d;
+      --muted:#667061;
+      --card:#fffaf0;
+      --card2:#f7efde;
+      --line:rgba(63,52,34,.18);
+      --accent:#8a5a31;
+      --accent2:#426b55;
+      --accent3:#b26b38;
+      --deep:#28362d;
+      --clay:#a9603b;
+      --sand:#d7b98b;
+      --sky:#607d8b;
+      --shadow:0 18px 50px rgba(48,38,25,.14);
+      --shadow-soft:0 10px 26px rgba(48,38,25,.08);
+      --radius:26px;
+      --mono:"SFMono-Regular","Consolas","Liberation Mono",monospace;
+      --sans:"Noto Sans TC","Microsoft JhengHei","PingFang TC",system-ui,-apple-system,Segoe UI,sans-serif;
+    }
+    [data-theme="dark"]{
+      --bg:#111612;
+      --bg2:#1b211b;
+      --ink:#f1eadb;
+      --muted:#b8bfad;
+      --card:#1b211c;
+      --card2:#20281f;
+      --line:rgba(230,220,195,.15);
+      --accent:#d2a365;
+      --accent2:#92b99b;
+      --accent3:#e0a068;
+      --deep:#e9eadf;
+      --clay:#cf835b;
+      --sand:#bda36e;
+      --sky:#8fb1c0;
+      --shadow:0 18px 60px rgba(0,0,0,.34);
+      --shadow-soft:0 10px 28px rgba(0,0,0,.22);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(178,107,56,.2), transparent 34rem),
+        radial-gradient(circle at 88% 8%, rgba(66,107,85,.16), transparent 34rem),
+        linear-gradient(135deg,var(--bg),var(--bg2));
+      line-height:1.8;
+      position:relative;
+    }
+    body::before{
+      content:"";
+      position:fixed; inset:0; pointer-events:none; opacity:.18; z-index:-1;
+      background-image: radial-gradient(circle at 1px 1px, rgba(70,58,41,.18) 1px, transparent 0);
+      background-size: 24px 24px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.28), transparent 72%);
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .progress{position:fixed;inset:0 0 auto 0;height:5px;background:transparent;z-index:1000}
+    .progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent3),var(--accent2));box-shadow:0 0 14px rgba(138,90,49,.35)}
+    .topbar{
+      position:sticky;top:0;z-index:900;
+      backdrop-filter: blur(18px);
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      border-bottom:1px solid var(--line);
+      box-shadow:0 10px 24px rgba(0,0,0,.04);
+    }
+    .topbar-inner{max-width:1240px;margin:auto;display:flex;align-items:center;gap:14px;padding:10px 18px;overflow-x:auto}
+    .brand{display:flex;align-items:center;gap:10px;white-space:nowrap;font-weight:900;color:var(--deep);letter-spacing:.02em}
+    .logo{width:34px;height:34px;border-radius:50%;background:conic-gradient(from 200deg,var(--accent2),var(--sand),var(--clay),var(--accent2));box-shadow:inset 0 0 0 5px rgba(255,255,255,.26), 0 8px 16px rgba(0,0,0,.1)}
+    .nav{display:flex;gap:8px;margin-left:auto;white-space:nowrap}
+    .nav a,.pill,.chip,button{
+      border:1px solid var(--line);
+      background:color-mix(in srgb,var(--card) 88%, transparent);
+      color:var(--ink);
+      border-radius:999px;
+      padding:8px 12px;
+      font:inherit;
+      cursor:pointer;
+      transition:.22s ease;
+    }
+    .nav a:hover,.nav a.active,.pill:hover,.chip.active,button:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--accent) 50%, var(--line));box-shadow:0 8px 20px rgba(0,0,0,.08)}
+    .nav a.active{background:linear-gradient(135deg, color-mix(in srgb,var(--accent) 18%, var(--card)), color-mix(in srgb,var(--accent2) 16%, var(--card)))}
+    .theme-toggle{margin-left:4px}
+    .wrap{max-width:1240px;margin:auto;padding:0 18px 76px}
+    .hero{
+      display:grid;grid-template-columns:1.22fr .78fr;gap:30px;align-items:center;padding:72px 0 42px;
+    }
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 13px;border-radius:999px;background:rgba(66,107,85,.12);border:1px solid var(--line);font-weight:800;color:var(--accent2);box-shadow:var(--shadow-soft)}
+    h1{font-size:clamp(2.55rem,6vw,5.5rem);line-height:1.02;margin:18px 0 16px;letter-spacing:-.045em;color:var(--deep)}
+    h2{font-size:clamp(1.72rem,3.2vw,2.55rem);line-height:1.18;margin:0 0 14px;color:var(--deep)}
+    h3{font-size:1.35rem;margin:0 0 10px;color:var(--deep)}
+    h4{font-size:1.05rem;margin:0 0 6px;color:var(--deep)}
+    .lead{font-size:1.12rem;color:var(--muted);max-width:70ch}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+    .hero-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+    .meta-card{min-width:140px;padding:12px 14px;border-radius:18px;background:color-mix(in srgb,var(--card) 84%, transparent);border:1px solid var(--line);box-shadow:var(--shadow-soft)}
+    .meta-card b{display:block;font-size:1.05rem;color:var(--accent)}
+    .meta-card span{display:block;font-size:.9rem;color:var(--muted)}
+    .primary{background:linear-gradient(135deg,var(--accent),var(--accent3));color:#fff;border:0;font-weight:800}
+    .secondary{background:rgba(66,107,85,.12);font-weight:750}
+    .hero-visual{min-height:430px;border-radius:40px;background:linear-gradient(160deg,#1e2a22,#4a3324 55%,#c58a55);position:relative;overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.16)}
+    .hero-visual::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 18%, rgba(255,255,255,.16), transparent 20rem)}
+    .earth{position:absolute;right:-70px;bottom:-120px;width:430px;height:430px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#d6b37e 0 12%,#a15f38 13% 30%,#473827 31% 52%,#263b32 53% 70%,#101714 71%);box-shadow:inset -35px -45px 80px rgba(0,0,0,.45),0 40px 90px rgba(0,0,0,.35)}
+    .ray{position:absolute;height:3px;background:linear-gradient(90deg,transparent,#f8d58f,transparent);transform-origin:left center;box-shadow:0 0 20px rgba(248,213,143,.8);opacity:.82}
+    .ray.r1{width:360px;left:24px;top:90px;transform:rotate(18deg)}
+    .ray.r2{width:330px;left:18px;top:190px;transform:rotate(-9deg)}
+    .ray.r3{width:380px;left:70px;top:290px;transform:rotate(26deg)}
+    .hero-card{position:absolute;left:24px;bottom:24px;right:24px;background:rgba(255,250,240,.92);color:#1e251e;border-radius:24px;padding:18px;box-shadow:0 18px 50px rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.46)}
+    .hero-card b{color:#75471f}
+    .grid{display:grid;gap:18px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{background:color-mix(in srgb,var(--card) 96%, transparent);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;position:relative;overflow:hidden}
+    .card::before{content:"";position:absolute;left:0;top:0;right:0;height:5px;background:linear-gradient(90deg,var(--accent2),var(--accent3));opacity:.8}
+    .card.soft{box-shadow:var(--shadow-soft);background:color-mix(in srgb,var(--card2) 88%, transparent)}
+    .kpi{display:flex;gap:12px;align-items:flex-start}.kpi .num{font-family:var(--mono);font-size:1.6rem;font-weight:900;color:var(--accent)}
+    .section{scroll-margin-top:82px;margin:34px 0 0;padding-top:26px}
+    .section-head{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;margin:0 0 14px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+    .section-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:900;color:var(--accent);letter-spacing:.03em;font-size:.98rem;padding:6px 12px;border-radius:999px;background:rgba(178,107,56,.08);border:1px solid var(--line);margin-bottom:10px}
+    .formula{font-family:var(--mono);background:rgba(66,107,85,.12);border:1px solid var(--line);padding:12px 14px;border-radius:16px;overflow:auto;color:var(--deep);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+    .note{border-left:4px solid var(--accent2);padding:12px 16px;background:rgba(66,107,85,.10);border-radius:14px;color:var(--muted)}
+    details{border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb,var(--card2) 88%, transparent);padding:12px 14px;box-shadow:var(--shadow-soft)}details+details{margin-top:10px}summary{cursor:pointer;font-weight:850;color:var(--deep)}
+    ul{padding-left:1.25rem}li{margin:.25rem 0}.small{font-size:.92rem;color:var(--muted)}.badge{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:.82rem;color:var(--muted);background:rgba(255,255,255,.28);box-shadow:var(--shadow-soft)}
+    .chapter-map{margin:24px 0 2px}.timeline{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}.timeline a{padding:14px 10px;border-radius:20px;background:color-mix(in srgb,var(--card) 90%, transparent);border:1px solid var(--line);text-align:center;font-weight:850;box-shadow:var(--shadow-soft);transition:.22s}.timeline a:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.timeline a span{display:block;color:var(--muted);font-size:.78rem;font-weight:600}
+    .figure-tools{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 18px}.search{min-width:240px;flex:1;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:10px 14px;color:var(--ink);font:inherit}
+    .fig-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.inline-figures{margin-top:26px;padding-top:8px;border-top:1px dashed var(--line)}.inline-figures-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:8px 0 16px}.fig-points{margin:.65rem 0 0;padding-left:1.15rem}.fig-points li{margin:.16rem 0}.fig-card{padding:0;overflow:hidden;transition:.24s ease}.fig-card:hover{transform:translateY(-3px);box-shadow:0 22px 48px rgba(48,38,25,.16)}.fig-card .fig-body p{margin:.55rem 0}.fig-img-wrap{aspect-ratio:4/3;background:linear-gradient(135deg,rgba(66,107,85,.2),rgba(138,90,49,.12));display:grid;place-items:center;cursor:zoom-in;position:relative;overflow:hidden}.fig-img-wrap::after{content:"放大查看";position:absolute;right:12px;bottom:12px;padding:6px 10px;border-radius:999px;background:rgba(17,17,17,.65);color:#fff;font-size:.78rem;letter-spacing:.03em;opacity:0;transform:translateY(8px);transition:.22s}.fig-card:hover .fig-img-wrap::after{opacity:1;transform:translateY(0)}.fig-card img{width:100%;height:100%;object-fit:contain;padding:10px;transition:.24s}.fig-card:hover img{transform:scale(1.03)}.fig-body{padding:16px 16px 18px}.fig-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}.fig-title{font-weight:900;font-size:1.08rem;color:var(--deep);line-height:1.35}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.74);z-index:1200;display:none;align-items:center;justify-content:center;padding:22px}.modal.open{display:flex}.modal-inner{width:min(1100px,96vw);max-height:92vh;overflow:auto;background:var(--card);border-radius:28px;box-shadow:0 30px 80px rgba(0,0,0,.45);border:1px solid var(--line)}.modal img{width:100%;max-height:68vh;object-fit:contain;background:#111;padding:8px}.modal-content{padding:18px 22px}.modal-close{position:fixed;top:18px;right:18px;background:#fff;color:#111;border:0}
+    .calculator{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}.input-row{display:grid;grid-template-columns:1.1fr .9fr;gap:8px;align-items:center;margin:8px 0}.input-row input,.input-row select{width:100%;padding:9px 10px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}.result{background:linear-gradient(135deg,rgba(66,107,85,.14),rgba(178,107,56,.10));border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow-soft)}.result strong{color:var(--accent)}
+    .raybox{min-height:245px;border-radius:20px;background:linear-gradient(180deg,rgba(66,107,85,.12),rgba(178,107,56,.12));border:1px solid var(--line);position:relative;overflow:hidden;box-shadow:var(--shadow-soft)}.raybox svg{width:100%;height:245px}.toggle-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.toggle-row button.active{background:var(--accent2);color:#fff}
+    .phase-input{display:flex;gap:8px}.phase-input input{flex:1;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:10px 14px;color:var(--ink);font:inherit}.phase-output{margin-top:12px;display:grid;gap:8px}.phase-token{border:1px solid var(--line);background:rgba(66,107,85,.10);border-radius:14px;padding:10px;box-shadow:var(--shadow-soft)}
+    .quiz{display:grid;gap:12px}.q{border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb,var(--card2) 88%, transparent);padding:14px;box-shadow:var(--shadow-soft)}.q label{display:block;margin:6px 0;cursor:pointer}.score{font-weight:900;color:var(--accent)}
+    .footer{margin-top:46px;padding:32px;border-radius:28px;background:linear-gradient(135deg,rgba(40,54,45,.96),rgba(94,62,36,.96));color:#fff;box-shadow:var(--shadow)}.footer .small{color:rgba(255,255,255,.78)}
+    .table{width:100%;border-collapse:collapse;border-radius:16px;overflow:hidden}.table th,.table td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}.table th{background:rgba(66,107,85,.16)}
+    @media (max-width:960px){.hero{grid-template-columns:1fr}.grid.two,.grid.three,.grid.four,.calculator{grid-template-columns:1fr}.fig-grid{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:repeat(4,1fr)}}
+    @media (max-width:640px){.fig-grid{grid-template-columns:1fr}.timeline{grid-template-columns:repeat(2,1fr)}.section-head{display:block}.hero{padding-top:40px}.hero-visual{min-height:340px}.earth{width:330px;height:330px}.nav{display:none}.hero-meta{gap:8px}.meta-card{min-width:calc(50% - 4px)}}
+    @media print{.topbar,.progress,.hero-actions,.figure-tools,.modal,.theme-toggle{display:none!important}body{background:#fff}.card{break-inside:avoid;box-shadow:none}.section{page-break-inside:avoid}.fig-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
 </head>
 <body>
-
-    <header>
-        <h1>第三章：地震學與地球結構</h1>
-        <p>為大二學生設計的30分鐘互動式探索之旅</p>
-    </header>
-
-    <nav>
-        <ul>
-            <li><a href="#sec3-1">3.1 簡介</a></li>
-            <li><a href="#sec3-2">3.2 折射震測</a></li>
-            <li><a href="#sec3-3">3.3 反射震測</a></li>
-            <li><a href="#sec3-4">3.4 球體波傳播</a></li>
-            <li><a href="#sec3-5">3.5 走時研究</a></li>
-            <li><a href="#sec3-6">3.6 非均向性</a></li>
-            <li><a href="#sec3-7">3.7 衰減與非彈性</a></li>
-            <li><a href="#sec3-8">3.8 地函地核組成</a></li>
-        </ul>
-    </nav>
-
-    <div class="container">
-        
-        <section id="sec3-1">
-            <h2>3.1 簡介 (Introduction)</h2>
-            <p>地震學是了解地球內部結構最強大的工具。因為我們無法鑽探到地心深處，科學家藉由觀察地震波（如 P波與 S波）在地球內部的傳播、反射與折射，來推測地底的岩石種類、狀態（固態或液態）與組成。</p>
-            <p>本章節將帶領你從最基本的平層折射原理，逐步推廣至真實的球體地球模型，並認識地球內部的非均向性與衰減現象。</p>
-        </section>
-
-        <section id="sec3-2">
-            <h2>3.2 折射震測法 (Refraction Seismology)</h2>
-            <p>當地震波遇到不同速度的地層交界面時，會發生折射與反射。折射震測法主要利用沿著地層交界面傳遞的<strong>首波 (Head Wave)</strong> 來反演淺層或地殼的速度結構。這是我們探勘地下結構最基礎的數學模型。</p>
-            
-            <div class="image-grid">
-                <div class="img-card">
-                    <div class="img-container" onclick="openLightbox(this)">
-                        <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.2-1.png" alt="三種基本射線路徑" data-desc="這張圖展示了震源到測站之間的三種基本波：直接波 (Direct wave)、反射波 (Reflected wave) 與首波/折射波 (Head wave)。首波的產生條件是下層速度必須大於上層速度。">
-                    </div>
-                    <div class="img-desc">
-                        <h4>圖 3.2-1：三種基本射線路徑</h4>
-                        <p>展示了震源到測站之間的三種基本波：直接波、反射波與首波。當下層速度大於上層速度時，臨界折射會產生首波，這也是我們推算下層速度的關鍵訊號。</p>
-                    </div>
-                </div>
-
-                <div class="img-card">
-                    <div class="img-container" onclick="openLightbox(this)">
-                        <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.2-4.png" alt="雙層模型的走時曲線" data-desc="此圖顯示走時 (Travel Time) 隨距離的變化。直接波是一條過原點的直線；反射波是雙曲線；折射波則是一條延遲出現的直線。交叉點距離 (Crossover distance) 是直接波與折射波同時到達的距離。">
-                    </div>
-                    <div class="img-desc">
-                        <h4>圖 3.2-4：雙層模型的走時曲線</h4>
-                        <p>橫軸為距離，縱軸為時間。你可看到直接波（過原點直線）、反射波（雙曲線）與首波（斜率較小的直線）。首波雖然較晚出發，但因在高速層傳遞，最終會在交叉點距離超越直接波。</p>
-                    </div>
-                </div>
-
-                <div class="img-card">
-                    <div class="img-container" onclick="openLightbox(this)">
-                        <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.2-5.png" alt="多層平層模型折射波" data-desc="當地下有多個不同速度的地層時，走時曲線會呈現多段不同斜率的折線。利用每一段的截距時間 (Intercept time) 和斜率 (速度的倒數)，我們可以逐層推算厚度。">
-                    </div>
-                    <div class="img-desc">
-                        <h4>圖 3.2-5：多層平層模型</h4>
-                        <p>現實中地下往往不只有一層。這張圖展示多層次下的走時曲線，每一段斜線代表該層的波速（斜率=1/v），藉由截距時間可逐一解算出各層的地層厚度。</p>
-                    </div>
-                </div>
-
-                <div class="img-card">
-                    <div class="img-container" onclick="openLightbox(this)">
-                        <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.2-19.png" alt="傾斜地層的折射" data-desc="真實地層並不總是平坦的。當介面傾斜時，往上傾(Up-dip)和往下傾(Down-dip)方向施測所得到的視速度(Apparent velocity)會不同。必須結合雙向震測才能求出真實速度與傾角。">
-                    </div>
-                    <div class="img-desc">
-                        <h4>圖 3.2-19：傾斜地層的折射</h4>
-                        <p>地球表面下的岩層常常是傾斜的。這張圖說明如果地層有傾角，從上坡(Up-dip)和下坡(Down-dip)打震波，量測到的波速會不一樣。必須正反向都測量，才能計算出真正的傾角和地層速度。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="sec3-3">
-            <h2>3.3 反射震測法 (Reflection Seismology)</h2>
-            <p>與折射震測相比，反射震測主要利用從地層邊界反射回來的波。這在石油探勘中極為重要。透過密集佈設的接收器與重複訊號的疊加（Stacking），科學家可以繪製出地下高解析度的構造剖面圖。</p>
-        </section>
-
-        <section id="sec3-4">
-            <h2>3.4 球體地球中的地震波 (Seismic waves in a spherical earth)</h2>
-            <p>地球是一個球體，且由於壓力與溫度的改變，越往地球深處，地震波速度通常越快。因此，地震波在地球內部的路徑不再是直線，而是呈現向上彎曲的弧線。</p>
-
-            <div class="image-grid">
-                <div class="img-card">
-                    <div class="img-container" onclick="openLightbox(this)">
-                        <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.4-5.png" alt="球體射線參數" data-desc="在球體座標中，斯涅爾定律 (Snell's Law) 改寫為 r*sin(i)/v = p (常數)。這稱為球體射線參數，它控制了地震波在地球內部的彎曲軌跡。">
-                    </div>
-                    <div class="img-desc">
-                        <h4>圖 3.4-5：球體射線參數</h4>
-                        <p>在平層模型中我們看角度，而在球體地球中，我們引入了「射線參數 p = (r * sin i) / v」。在同一條射線路徑上，p 永遠保持恆定，這是計算波傳遞路徑的核心公式。</p>
-                    </div>
-                </div>
-
-                <div class="img-card">
-                    <div class="img-container" onclick="openLightbox(this)">
-                        <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.4-6.png" alt="波速漸增導致射線彎曲" data-desc="因為地函的波速隨深度增加，根據 Snell 定律，地震波會不斷向地表方向彎曲，最終回到地表被測站接收。">
-                    </div>
-                    <div class="img-desc">
-                        <h4>圖 3.4-6：射線的弧形彎曲</h4>
-                        <p>因為地球越深處壓力越大、波速通常越快，導致原本往地心傳遞的地震波會不斷被「折射」而向上彎曲，最終形成漂亮的弧形路徑回到地表被測站記錄。</p>
-                    </div>
-                </div>
-
-                <div class="img-card">
-                    <div class="img-container" onclick="openLightbox(this)">
-                        <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.4-7.png" alt="地核陰影區" data-desc="由於外核是液態且 P波速度在此急劇下降，導致波向內折射，在地表 103度到 143度之間形成 P波接收不到的陰影區 (Shadow Zone)。">
-                    </div>
-                    <div class="img-desc">
-                        <h4>圖 3.4-7：地核陰影區的發現</h4>
-                        <p>這是地震學歷史上的大發現！當 P波進入液態外核時，波速突然下降，導致折射角度往地心偏折，在地表 103° 到 143° 之間形成接收不到直接 P波的「陰影區」，證明了液態外核的存在。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="sec3-5">
-            <h2>3.5 體波走時研究 (Body wave travel time studies)</h2>
-            <p>透過收集全球無數地震的走時數據，科學家建構了地球的一維速度模型（如 JB模型、PREM模型）。並給予不同路徑的地震波特定的代碼（如 P, S, c, K, I 等）來辨識它們穿過了哪些圈層。</p>
-
-            <div class="image-grid">
-                <div class="img-card">
-                    <div class="img-container" onclick="openLightbox(this)">
-                        <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.5-1.png" alt="地球內部速度模型" data-desc="展示經典的 Jeffreys-Bullen (JB) 模型與現代的 IASP91/PREM 模型中，P波與 S波速度隨深度的變化。可明顯看到在地函-地核交界處 (CMB) P波速度驟降，且 S波消失。">
-                    </div>
-                    <div class="img-desc">
-                        <h4>圖 3.5-1：地球內部速度模型</h4>
-                        <p>綜合大量的地震走時數據，科學家繪製出這張圖。實線與虛線分別代表了不同的一維模型（如 JB 模型）。注意在約 2900 公里深處（核函邊界），P波速度劇降，且 S波速度歸零（液態無法傳遞剪力波）。</p>
-                    </div>
-                </div>
-
-                <div class="img-card">
-                    <div class="img-container" onclick="openLightbox(this)">
-                        <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.5-2.png" alt="地震波路徑命名規則" data-desc="地震波相位命名：大寫 P/S 代表地函中的體波；K 代表外核的 P波；I 代表內核的 P波；c 代表在 CMB 反射。例如 PKiKP。">
-                    </div>
-                    <div class="img-desc">
-                        <h4>圖 3.5-2：地震波相位命名</h4>
-                        <p>如同幫波發放護照，科學家用英文字母標記波的旅程：大寫 P/S 在地函跑，K 在外核跑，I 在內核跑，小寫 c 代表在核函交界面反射。例如 PKP 代表穿透了地函與外核的 P 波。</p>
-                    </div>
-                </div>
-
-                <div class="img-card">
-                    <div class="img-container" onclick="openLightbox(this)">
-                        <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.5-3.png" alt="全球走時曲線" data-desc="各種類型地震波的全球走時曲線圖，橫軸為震央距 (角度)，縱軸為走時 (分鐘)。">
-                    </div>
-                    <div class="img-desc">
-                        <h4>圖 3.5-3：全球綜合走時曲線</h4>
-                        <p>這是一張地震學家的「火車時刻表」。縱軸是時間，橫軸是距離（以角度表示）。透過比對測站收到的各種波形到達時間，我們就能在地圖上定位震源並研究內部構造。</p>
-                    </div>
-                </div>
-
-                <div class="img-card">
-                    <div class="img-container" onclick="openLightbox(this)">
-                        <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.5-5.png" alt="深度相位 pP 與 sS" data-desc="對於深層地震，往上傳遞先在地表反射再往下傳的波稱為 pP 或 sS。pP 與 P 的時間差 (pP-P) 常常被用來精確估算震源深度。">
-                    </div>
-                    <div class="img-desc">
-                        <h4>圖 3.5-5：決定深度的反射波 (pP)</h4>
-                        <p>發生在較深處的地震，除了直接往下傳的 P 波，還有先往上打到地表再反射往下的波（小寫的 pP）。透過計算 pP 和 P 抵達的時間差，我們可以非常精確地算出地震發生的深度。</p>
-                    </div>
-                </div>
-
-                <div class="img-card">
-                    <div class="img-container" onclick="openLightbox(this)">
-                        <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.5-12.png" alt="複雜地核相位" data-desc="展示更複雜的波陣面與路徑，如 PKP 及其各種分支 (AB, BC, DF 等)，顯示波在進入球體地核後的焦散現象。">
-                    </div>
-                    <div class="img-desc">
-                        <h4>圖 3.5-12：深入地核的複雜波相</h4>
-                        <p>這張圖展示了進入地核的波（如 PKP 波）由於外核的球體透鏡效應，會產生分岔現象（如 AB、BC 支）。這些微小的波形差異是我們研究固態內核大小與性質的唯一線索。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="sec3-6">
-            <h2>3.6 非均向性地球結構 (Anisotropic earth structure)</h2>
-            <p>傳統模型假設地球內部是均向性的 (Isotropic)，也就是波往哪裡走速度都一樣。但實際上，地函中的橄欖石晶體排列、或是斷層帶的裂隙，會導致地震波在不同方向有不同的速度。這種現象稱為<strong>非均向性 (Anisotropy)</strong>，是研究板塊運動與地函熱對流流向的重要指標。</p>
-        </section>
-
-        <section id="sec3-7">
-            <h2>3.7 衰減與非彈性 (Attenuation and anelasticity)</h2>
-            <p>地震波在地球內部傳播時，能量會因為岩石的摩擦與熱耗散而衰減，這代表地球並非完美彈性體。科學家使用 <strong>品質因子 Q (Quality factor)</strong> 來表示。Q 值越高，表示能量損耗越少；Q 值低通常意味著該處有高溫、部分熔融或富含液體。</p>
-
-            <div class="image-grid">
-                <div class="img-card">
-                    <div class="img-container" onclick="openLightbox(this)">
-                        <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.7-1.png" alt="振幅的幾何擴散與衰減" data-desc="地震波的振幅隨著距離增加而變小，除了因為波前擴大造成的幾何擴散 (Geometric spreading)，還包含岩石吸收能量造成的內在衰減 (Intrinsic attenuation)。">
-                    </div>
-                    <div class="img-desc">
-                        <h4>圖 3.7-1：地震波振幅衰減</h4>
-                        <p>離震源越遠，震度越小。圖中說明振幅變小有兩個原因：一是像水波一樣範圍擴大導致能量分散（幾何擴散），二是岩石本身吸收了波的能量轉化為熱能（內在衰減）。</p>
-                    </div>
-                </div>
-
-                <div class="img-card">
-                    <div class="img-container" onclick="openLightbox(this)">
-                        <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.7-3.png" alt="中洋脊的 Q 值分佈" data-desc="這是一張橫切中洋脊的 Q 值構造圖。可以看到中洋脊正下方 (岩漿上湧處) 的 Q 值非常低 (高衰減區)，這反映了高溫和部分熔融的狀態。">
-                    </div>
-                    <div class="img-desc">
-                        <h4>圖 3.7-3：中洋脊下的 Q 值分佈</h4>
-                        <p>Q 值越低，代表越像一塊「吸音海綿」。在這張中洋脊的切面圖中，正下方有明顯的低 Q 值區域，強烈暗示這裡有高溫的岩漿正在上湧（部分熔融狀態）。</p>
-                    </div>
-                </div>
-
-                <div class="img-card">
-                    <div class="img-container" onclick="openLightbox(this)">
-                        <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/3.7-5.png" alt="衰減與頻率的關係" data-desc="非彈性衰減通常與頻率有關。高頻波的能量損耗比低頻波快，因此遠處測站收到的地震紀錄往往剩下低頻成分。">
-                    </div>
-                    <div class="img-desc">
-                        <h4>圖 3.7-5：衰減頻率相依性</h4>
-                        <p>高頻率的波在摩擦時損耗的能量比低頻率多。這就好像你在房間外聽隔壁的音樂，通常只聽得到低沉的「動滋動滋」重低音（低頻穿透力強），而聽不到高音。地震波也是同樣的道理。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="sec3-8">
-            <h2>3.8 地函與地核的組成 (Composition of the mantle and the core)</h2>
-            <p>透過綜合前述的地震波速度、衰減特性，再結合高壓礦物物理學與隕石化學的證據，科學家拼湊出：地殼主要是矽酸鹽岩石；地函主要由橄欖岩 (Peridotite) 組成；外核是液態的鐵鎳合金；內核則是固態的鐵。地震學是我們驗證這些假設最堅實的後盾！</p>
-        </section>
-
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top"><span class="logo"></span><span>Seismology Ch.3</span></a>
+      <nav class="nav" aria-label="章節導覽">
+        <a href="#s31">3.1</a><a href="#s32">3.2</a><a href="#s33">3.3</a><a href="#s34">3.4</a><a href="#s35">3.5</a><a href="#s36">3.6</a><a href="#s37">3.7</a><a href="#s38">3.8</a><a href="#record">走時圖</a>
+      </nav>
+      <button id="themeBtn" class="theme-toggle" type="button" title="切換深色模式">深色</button>
     </div>
+  </header>
 
-    <div class="lightbox" id="lightbox">
-        <span class="close-btn" onclick="closeLightbox()">&times;</span>
-        <img id="lightbox-img" src="" alt="">
-        <div class="caption" id="lightbox-caption"></div>
-    </div>
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">第三章｜地震學與地球構造</span>
+        <h1>用震波走時，看見地球內部</h1>
+        <p class="lead">這份互動式網頁把第三章整理成「概念 → 公式 → 圖像 → 操作」的學習路徑。重點不是背相位名稱，而是理解：震波為什麼轉彎、哪條路先到、走時曲線如何反推出地球構造。</p>
+        <div class="hero-actions">
+          <a class="pill primary" href="#s31">開始學習</a>
+          <a class="pill secondary" href="#s32">依章節查看指定圖片</a>
+          <a class="pill" href="#quiz">章末小測</a>
+        </div>
+        <div class="hero-meta">
+          <div class="meta-card"><b>3.1–3.8</b><span>完整章節整理</span></div>
+          <div class="meta-card"><b>16 張圖</b><span>皆嵌入對應章節</span></div>
+          <div class="meta-card"><b>互動學習</b><span>計算器、解碼器、小測驗</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="地球內部震波示意">
+        <span class="ray r1"></span><span class="ray r2"></span><span class="ray r3"></span><div class="earth"></div>
+        <div class="hero-card"><b>核心問題：</b>同一場地震，為什麼不同測站接收到的 P、S、PKP、ScS 會在不同時間出現？答案藏在速度構造、射線參數、反射折射與衰減之中。</div>
+      </div>
+    </section>
 
-    <footer>
-        <p>&copy; 2024 地震學互動學習網 - 專為地球科學系大二學生製作</p>
+    <section class="grid four chapter-map" aria-label="學習重點摘要">
+      <div class="card soft kpi"><div class="num">T</div><div><h3>走時</h3><p class="small">震波從震源到測站所需時間，是反推速度構造的主資料。</p></div></div>
+      <div class="card soft kpi"><div class="num">p</div><div><h3>射線參數</h3><p class="small">走時曲線斜率，代表表面視慢度，也標記一條特定射線。</p></div></div>
+      <div class="card soft kpi"><div class="num">Q</div><div><h3>衰減</h3><p class="small">振幅會因幾何擴散、散射、多路徑與非彈性而變小。</p></div></div>
+      <div class="card soft kpi"><div class="num">CMB</div><div><h3>核心邊界</h3><p class="small">外核不能傳 S 波，P 波速度驟降，造成陰影帶與核心相位。</p></div></div>
+    </section>
+
+    <section class="chapter-map">
+      <div class="timeline">
+        <a href="#s31">3.1<span>走時資料</span></a><a href="#s32">3.2<span>折射法</span></a><a href="#s33">3.3<span>反射法</span></a><a href="#s34">3.4<span>球形地球</span></a><a href="#s35">3.5<span>體波相位</span></a><a href="#s36">3.6<span>非均向性</span></a><a href="#s37">3.7<span>衰減</span></a><a href="#s38">3.8<span>成分推論</span></a>
+      </div>
+    </section>
+
+    <section id="s31" class="section card">
+      <div class="section-head"><div><div class="section-tag">3.1 Introduction</div><h2>地震學如何變成地球內部的「掃描工具」？</h2></div><span class="badge">travel time first</span></div>
+      <div class="grid two">
+        <div>
+          <p>第三章的主軸是：利用地震波的走時、振幅與波形，反推出地球內部的速度、密度與彈性性質。地球內部不能直接挖開來看，所以地震學像一種自然版的「透視影像」。</p>
+          <p>最重要的資料是 <b>arrival time</b>，也就是震波到達測站的時間。若知道震源時間與位置，就能得到 <b>travel time</b>，再用走時去限制震波路徑上的速度構造。</p>
+          <div class="formula">T<sub>sr</sub> = ∫<sub>ray path</sub> ds / v(s)</div>
+        </div>
+        <div class="card soft">
+          <h3>本章思考順序</h3>
+          <ol>
+            <li>先把地球簡化成平坦水平層。</li>
+            <li>再加入反射、折射與多測站資料。</li>
+            <li>距離變大後，改用球形地球幾何。</li>
+            <li>最後加入真實地球的非均向性與衰減。</li>
+          </ol>
+          <p class="note">一句話：走時提供速度構造，速度構造再連結到地球內部的溫度、礦物、成分與狀態。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="s32" class="section card">
+      <div class="section-head"><div><div class="section-tag">3.2 Refraction Seismology</div><h2>折射地震學：用第一個到的波找地下速度</h2></div><span class="badge">Pg / Pn / PmP</span></div>
+      <div class="grid two">
+        <div>
+          <p>折射法常把地下看成速度隨深度增加的層狀介質。最基本模型是：上層速度 v<sub>0</sub>、厚度 h<sub>0</sub>，下方半空間速度 v<sub>1</sub>，且 v<sub>1</sub> &gt; v<sub>0</sub>。</p>
+          <details open><summary>三種基本路徑</summary>
+            <ul>
+              <li><b>Direct wave</b>：沿上層直接傳播，T<sub>D</sub>=x/v<sub>0</sub>。</li>
+              <li><b>Reflected wave</b>：從界面反射回來，走時曲線是雙曲線。</li>
+              <li><b>Head wave</b>：到達臨界角後沿高速層頂部傳播，再向上回到地表。</li>
+            </ul>
+          </details>
+          <details><summary>為什麼 head wave 可能比 direct wave 先到？</summary>
+            <p>雖然 head wave 路徑比較長，但它有一段在高速層中傳播。距離夠遠時，「走高速公路繞一點路」會比「慢速直走」更快。</p>
+          </details>
+          <div class="formula">T<sub>H</sub>(x)=x/v<sub>1</sub>+τ<sub>1</sub>,　τ<sub>1</sub>=2h<sub>0</sub>√(1/v<sub>0</sub><sup>2</sup> − 1/v<sub>1</sub><sup>2</sup>)</div>
+        </div>
+        <div class="calculator card soft" aria-label="折射走時計算器">
+          <div>
+            <h3>互動：折射走時計算器</h3>
+            <div class="input-row"><label>v0 上層速度 km/s</label><input id="v0" type="number" min="1" step="0.1" value="6.0"></div>
+            <div class="input-row"><label>v1 下層速度 km/s</label><input id="v1" type="number" min="1" step="0.1" value="8.0"></div>
+            <div class="input-row"><label>h0 上層厚度 km</label><input id="h0" type="number" min="0.1" step="0.5" value="30"></div>
+            <div class="input-row"><label>x 測站距離 km</label><input id="distx" type="number" min="1" step="5" value="180"></div>
+            <button id="calcRef" class="primary" type="button">計算走時</button>
+          </div>
+          <div class="result" id="refResult">輸入參數後按下計算。</div>
+        </div>
+      </div>
+      <div class="grid two" style="margin-top:18px">
+        <div class="raybox"><svg viewBox="0 0 700 245" role="img" aria-label="直接波反射波頭波示意">
+          <rect x="0" y="0" width="700" height="115" fill="rgba(66,107,85,.11)"/><rect x="0" y="115" width="700" height="130" fill="rgba(178,107,56,.13)"/><line x1="0" y1="115" x2="700" y2="115" stroke="currentColor" stroke-width="2" stroke-dasharray="8 6" opacity=".55"/>
+          <circle cx="70" cy="40" r="8" fill="var(--accent3)"/><circle cx="630" cy="40" r="8" fill="var(--accent2)"/><text x="48" y="24" fill="currentColor">Source</text><text x="598" y="24" fill="currentColor">Receiver</text>
+          <path id="pathDirect" d="M70 40 C220 36 480 36 630 40" stroke="#6c8f73" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path id="pathRefl" d="M70 40 Q350 205 630 40" stroke="#b26b38" stroke-width="5" fill="none" stroke-linecap="round" opacity=".75"/>
+          <path id="pathHead" d="M70 40 L185 115 L515 115 L630 40" stroke="#d9a24c" stroke-width="5" fill="none" stroke-linecap="round" opacity=".85"/>
+          <text x="288" y="35" fill="currentColor">Direct</text><text x="324" y="202" fill="currentColor">Reflected</text><text x="319" y="106" fill="currentColor">Head wave</text>
+        </svg></div>
+        <div class="card soft">
+          <h3>折射法讀圖技巧</h3>
+          <p>在走時圖上，線越平代表速度越快；截距 τ 可用來反推界面深度。若有反向測線，還可以估計傾斜界面的 dip。</p>
+          <p>實際資料常使用 <b>reduced travel time plot</b>，把 T−x/v<sub>red</sub> 畫出來，讓高速相位更容易比較。</p>
+        </div>
+      </div>
+      <div class="inline-figures">
+        <div class="inline-figures-head"><div><h3>3.2 指定圖片｜折射地震學圖解</h3><p class="small">以下圖片直接放在折射法章節中，閱讀時可對照 direct wave、head wave、Moho 與 reduced travel time 的概念。</p></div><span class="badge">4 figures</span></div>
+        <div id="figures-32" class="fig-grid"></div>
+      </div>
+    </section>
+
+    <section id="s33" class="section card">
+      <div class="section-head"><div><div class="section-tag">3.3 Reflection Seismology</div><h2>反射地震學：把地底反射面變成影像</h2></div><span class="badge">CMP / NMO / Migration</span></div>
+      <div class="grid two">
+        <div>
+          <p>反射法使用從地下界面反射回來的能量，常用於油氣探勘與地殼構造影像。最簡單的水平界面反射，其走時曲線是雙曲線：</p>
+          <div class="formula">T(x)<sup>2</sup> = x<sup>2</sup>/v<sup>2</sup> + t<sub>0</sub><sup>2</sup></div>
+          <p>其中 t<sub>0</sub> 是零偏移距的雙程垂直走時。速度越快，雙曲線越平；反射越深，通常需要更大的 offset 才能穩定估速。</p>
+        </div>
+        <div class="card soft">
+          <h3>資料處理流程</h3>
+          <ol>
+            <li><b>CMP gather</b>：把相同中點、不同 offset 的紀錄排在一起。</li>
+            <li><b>NMO correction</b>：校正 offset 造成的走時差。</li>
+            <li><b>Stacking</b>：疊加增強真正反射，壓低雜訊。</li>
+            <li><b>Migration</b>：把傾斜反射與繞射能量移回正確位置。</li>
+          </ol>
+        </div>
+      </div>
+      <p class="note">反射剖面看起來像地底照片，但本質上是「波場在雙程走時上的顯示」。速度模型不準時，時間轉深度也會跟著偏。</p>
+    </section>
+
+    <section id="s34" class="section card">
+      <div class="section-head"><div><div class="section-tag">3.4 Seismic Waves in a Spherical Earth</div><h2>球形地球中的震波：距離一大，地球不能再當平的</h2></div><span class="badge">p = r sin i / v</span></div>
+      <div class="grid two">
+        <div>
+          <p>近距離折射、反射可近似平面層；但遠震穿越深部地球時，必須用球形幾何。球形地球的射線參數為：</p>
+          <div class="formula">p = r sin i / v　，且　p = dT/dΔ</div>
+          <p>速度通常隨深度增加，震波向下時會逐漸彎曲，直到入射角 i=90° 達到 turning depth，再彎回地表。</p>
+        </div>
+        <div class="card soft">
+          <h3>三種速度構造會造成三種走時樣貌</h3>
+          <div class="toggle-row" id="velocityCases">
+            <button type="button" class="active" data-case="slow">速度慢慢增加</button>
+            <button type="button" data-case="rapid">速度快速增加</button>
+            <button type="button" data-case="low">低速層</button>
+          </div>
+          <div id="caseText" class="result" style="margin-top:12px">速度緩慢增加時，T(Δ) 連續且凹向下，p 隨距離增加而減小。</div>
+        </div>
+      </div>
+      <div class="inline-figures">
+        <div class="inline-figures-head"><div><h3>3.4 指定圖片｜球形地球中的射線與走時曲線</h3><p class="small">這三張圖對應速度平滑增加、速度快速增加與低速層，重點是看 T(Δ)、p(Δ) 與陰影帶如何被速度構造控制。</p></div><span class="badge">3 figures</span></div>
+        <div id="figures-34" class="fig-grid"></div>
+      </div>
+    </section>
+
+    <section id="s35" class="section card">
+      <div class="section-head"><div><div class="section-tag">3.5 Body Wave Travel Time Studies</div><h2>體波走時研究：用相位名稱讀地球深部</h2></div><span class="badge">P / S / K / I / J</span></div>
+      <div class="grid two">
+        <div>
+          <p>體波相位名稱像密碼：每個字母代表震波穿過、反射或轉換的位置。透過大量地震在不同震央距的到時資料，可以建立走時曲線與地球參考模型。</p>
+          <table class="table">
+            <tr><th>符號</th><th>意思</th></tr>
+            <tr><td>P / S</td><td>P 波 / S 波穿越地函等固體區域</td></tr>
+            <tr><td>K</td><td>P 波穿越液態外核</td></tr>
+            <tr><td>I / J</td><td>P 波 / S 波穿越固態內核</td></tr>
+            <tr><td>c / i</td><td>在 CMB / ICB 反射</td></tr>
+            <tr><td>p / s</td><td>從震源向上出發後在自由表面反射的 P / S 波</td></tr>
+          </table>
+        </div>
+        <div class="card soft">
+          <h3>互動：相位名稱解碼</h3>
+          <div class="phase-input"><input id="phaseInput" value="PKIKP" aria-label="輸入相位名稱"><button id="decodePhase" class="primary" type="button">解碼</button></div>
+          <div id="phaseOutput" class="phase-output"></div>
+          <p class="small">試試看：ScS、PcP、pP、SKS、Pdiff、PKiKP。</p>
+        </div>
+      </div>
+      <details style="margin-top:16px"><summary>核心相位與陰影帶</summary><p>液態外核的 P 波速度低於下地函，且 S 波不能穿越外核。這會造成 P 波陰影帶，並讓 PKP、PKIKP、PKiKP、Pdiff 等核心相位成為研究外核、內核與核心邊界的重要工具。</p></details>
+      <details><summary>上地函 410 / 660 km 不連續面</summary><p>速度快速增加會造成 triplication：同一震央距可能有三條射線、三個到時。這正是研究 410 km 與 660 km 相變界面的重要訊號。</p></details>
+      <div class="inline-figures">
+        <div class="inline-figures-head"><div><h3>3.5 指定圖片｜體波相位、核心相位與地球速度模型</h3><p class="small">這組圖片適合搭配相位解碼器一起讀：先看 P、S 速度模型，再理解各相位路徑與走時曲線。</p></div><span class="badge">5 figures</span></div>
+        <div id="figures-35" class="fig-grid"></div>
+      </div>
+    </section>
+
+    <section id="s36" class="section card">
+      <div class="section-head"><div><div class="section-tag">3.6 Anisotropic Earth Structure</div><h2>非均向性：同一種岩石，方向不同，速度也不同</h2></div><span class="badge">S-wave splitting</span></div>
+      <div class="grid three">
+        <div class="card soft"><h3>SPO</h3><p><b>Shape-preferred orientation</b>：岩層、裂隙、片理等形狀排列造成整體方向性。例如水平層狀構造會使水平與垂直方向速度不同。</p></div>
+        <div class="card soft"><h3>LPO</h3><p><b>Lattice-preferred orientation</b>：礦物晶格被流動或應力排列。例如橄欖石在上地函中的排列，可反映板塊運動與地函流動。</p></div>
+        <div class="card soft"><h3>Shear-wave splitting</h3><p>S 波進入非均向介質後分裂為快、慢兩個偏振方向，兩者到時差可用來推測非均向強度與快軸方向。</p></div>
+      </div>
+      <p class="note">非均向性通常比地球徑向速度變化小，但在研究板塊底部流動、D″ 層與內核結構時非常關鍵。</p>
+    </section>
+
+    <section id="s37" class="section card">
+      <div class="section-head"><div><div class="section-tag">3.7 Attenuation and Anelasticity</div><h2>衰減與非彈性：震波為什麼越傳越弱？</h2></div><span class="badge">Q factor</span></div>
+      <div class="grid two">
+        <div>
+          <p>震波振幅變小不只因為能量消失，也可能只是能量被分散到更大的波前或被聚焦到別處。講義把振幅降低分成四類：</p>
+          <ul>
+            <li><b>Geometric spreading</b>：波前擴大，單位面積能量變少。</li>
+            <li><b>Scattering</b>：小尺度不均質讓能量散到其他方向，形成 coda。</li>
+            <li><b>Multipathing</b>：速度不均造成聚焦、散焦，改變局部振幅。</li>
+            <li><b>Anelasticity</b>：真正把彈性能轉成熱，屬於 intrinsic attenuation。</li>
+          </ul>
+        </div>
+        <div class="card soft">
+          <h3>互動：Q 值與振幅</h3>
+          <div class="input-row"><label>Q 值</label><input id="qVal" type="range" min="50" max="1000" value="250"></div>
+          <div class="input-row"><label>頻率 f (Hz)</label><input id="fVal" type="range" min="0.1" max="5" value="1" step="0.1"></div>
+          <div class="input-row"><label>傳播時間 t (s)</label><input id="tVal" type="range" min="10" max="400" value="120"></div>
+          <div id="attenResult" class="result">調整滑桿查看振幅比例。</div>
+        </div>
+      </div>
+      <p class="note">高溫、部分熔融或流體通常會提高衰減，因此速度低且 Q 低的區域常被解釋為較熱或有熔體。</p>
+      <div class="inline-figures">
+        <div class="inline-figures-head"><div><h3>3.7 指定圖片｜衰減、Q 值與速度不均</h3><p class="small">以下圖片放在衰減章節中，分別用地震圖、速度/衰減剖面與多路徑示意說明振幅為何會改變。</p></div><span class="badge">3 figures</span></div>
+        <div id="figures-37" class="fig-grid"></div>
+      </div>
+    </section>
+
+    <section id="s38" class="section card">
+      <div class="section-head"><div><div class="section-tag">3.8 Composition of the Mantle and the Core</div><h2>從速度、密度到成分：地函與核心是什麼做的？</h2></div><span class="badge">PREM / density / phase change</span></div>
+      <div class="grid two">
+        <div>
+          <p>地震學直接給我們的是 P、S 波速度與部分密度限制；要進一步說明成分，必須結合重力、地球轉動慣量、岩石物理、礦物高壓實驗與宇宙化學資料。</p>
+          <p>地球平均密度約 5.5 g/cm³，高於地表岩石密度，表示內部必須有高密度核心。外核中 S 波速度為 0，代表液態；內核有有限 S 波速度，代表固態。</p>
+        </div>
+        <div class="card soft">
+          <h3>重點連結</h3>
+          <ul>
+            <li>410、520、660 km 不連續面：與橄欖石相變、尖晶石/鈣鈦礦結構有關。</li>
+            <li>CMB：密度與速度劇烈改變，是地函與外核的重大邊界。</li>
+            <li>核心成分：接近鐵，但純鐵太重，因此通常推測含較輕元素。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="record" class="section card">
+      <div class="section-head"><div><div class="section-tag">Final Case Study</div><h2>2026/5/1 地震震波走時圖：Record Section 怎麼讀？</h2></div><span class="badge">最後案例</span></div>
+      <div class="grid two">
+        <div class="fig-img-wrap" style="aspect-ratio:4/3;border-radius:20px;border:1px solid var(--line)"><img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/record_section.png" alt="2026年5月1日地震 record section 震波走時圖"></div>
+        <div>
+          <p>這張圖是 2026/5/1 地震的 <b>record section</b>。record section 的概念是：把不同測站的地震波形依震央距排列，形成一張「距離—時間」圖。每一條 wiggle 是一個測站記錄，斜向排列的能量帶就是同一個震波相位在不同距離的到時。</p>
+          <ul>
+            <li><b>先找第一個清楚到時</b>：通常是 P 波，代表最快的體波路徑。</li>
+            <li><b>看斜率</b>：斜率 dT/dΔ 就是射線參數 p；越平表示表面視速度越快。</li>
+            <li><b>看相位分離</b>：若 P、S、表面波或核心相位形成不同能量帶，就能比較其速度與路徑。</li>
+            <li><b>看振幅與頻率</b>：不同距離的振幅變化反映幾何擴散、衰減、散射與多路徑聚焦。</li>
+          </ul>
+          <p class="note">這張圖可以放在網頁最後當作總結：前面學的走時曲線、射線參數、相位命名與衰減，最後都會回到「如何讀一張真實 record section」。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz" class="section card">
+      <div class="section-head"><div><div class="section-tag">Quick Review</div><h2>章末小測：檢查你是否真的看懂</h2></div><span class="badge">interactive quiz</span></div>
+      <div id="quizBox" class="quiz"></div>
+      <button id="checkQuiz" class="primary" type="button" style="margin-top:12px">檢查答案</button>
+      <div id="quizScore" class="score" style="margin-top:12px"></div>
+    </section>
+
+    <footer class="footer">
+      <h2>部署到 GitHub Pages</h2>
+      <p>把本檔命名為 <b>index.html</b>，放到 <b>yaxin06/seismology_ch3</b> repository 的 main 分支根目錄。到 Settings → Pages → Branch 選 main / root，即可部署。圖片已使用 raw.githubusercontent.com 絕對路徑，因此不需要另外改圖片路徑。</p>
+      <p class="small">建議：若要完全離線備份，也可把圖片改成相對路徑，例如 <code>3.2-1.png</code>。</p>
     </footer>
+  </main>
 
-    <script>
-        // 平滑滾動至錨點
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-                targetSection.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-label="圖片放大視窗">
+    <button id="modalClose" class="modal-close">關閉</button>
+    <div class="modal-inner"><img id="modalImg" alt=""><div class="modal-content"><h3 id="modalTitle"></h3><p id="modalText"></p><ul id="modalPoints"></ul></div></div>
+  </div>
 
-        // Lightbox 互動邏輯
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxCaption = document.getElementById('lightbox-caption');
+  <script>
+    const imageBase = 'https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/';
+    const figures = [
+      {id:'3.2-1', section:'3.2', file:'3.2-1.png', title:'Fig. 3.2-1｜水平層上三種基本震波路徑', text:'圖中呈現 direct wave、reflected wave 與 head wave。head wave 只有在下方速度 v1 大於上層速度 v0 時才會形成，因為它需要在高速界面附近傳播。', points:['Direct wave：路徑短，近距離最早到。','Reflected wave：在界面反射，走時曲線呈雙曲線。','Head wave：路徑較長，但遠距離可能因高速層而最早到。']},
+      {id:'3.2-19', section:'3.2', file:'3.2-19.png', title:'Fig. 3.2-19｜全球地殼厚度圖', text:'此圖比較全球 Moho 深度與地殼厚度。通常海洋地殼較薄，大陸與造山帶較厚；山脈下方常有地殼根，與均衡補償有關。', points:['厚地殼多出現在高山與大陸碰撞區。','薄地殼多出現在海洋盆地。','折射資料可用來建立全球地殼厚度模型。']},
+      {id:'3.2-4', section:'3.2', file:'3.2-4.png', title:'Fig. 3.2-4｜Moho 發現的走時證據', text:'Mohorovičić 觀察到 Pg/Pn 與 Sg/Sn 等不同斜率走時線，指出淺部低速地殼與深部高速地函之間存在明顯界面，也就是 Moho。', points:['Pg、Sg：在地殼內傳播的直接波。','Pn、Sn：沿 Moho 附近高速地函傳播的頭波。','不同斜率代表不同速度層。']},
+      {id:'3.2-5', section:'3.2', file:'3.2-5.png', title:'Fig. 3.2-5｜折射剖面與 reduced travel time', text:'多個測站波形依距離排列後，可看見 Pg、Pn、PmP。圖中使用 T−X/6 的 reduced time，讓高速相位更容易在圖上被辨認。', points:['Pg、Pn 多呈近似直線，可由斜率估速度。','PmP 是 Moho 反射，通常呈曲線。','Reduced time 可壓縮圖幅、凸顯相位差異。']},
+      {id:'3.4-5', section:'3.4', file:'3.4-5.png', title:'Fig. 3.4-5｜速度隨深度緩慢增加', text:'速度平滑增加時，射線逐漸向上彎回地表。T(Δ) 曲線連續且凹向下，p 隨震央距增加而減小。', points:['深一點的射線走得更遠。','走時曲線斜率 p=dT/dΔ。','沒有明顯斷裂或陰影帶。']},
+      {id:'3.4-6', section:'3.4', file:'3.4-6.png', title:'Fig. 3.4-6｜速度快速增加造成 triplication', text:'若某深度速度快速增加，射線會強烈彎曲，造成同一距離可能有三條射線到達，即 triplication。', points:['T(Δ) 會分成三個分支。','分支交會處常形成 caustic，振幅變大。','410、660 km 不連續面常造成類似現象。']},
+      {id:'3.4-7', section:'3.4', file:'3.4-7.png', title:'Fig. 3.4-7｜低速層與陰影帶', text:'低速層會讓射線向下彎，導致某些距離沒有直接幾何射線到達，形成 shadow zone。', points:['低速層使 T(Δ)、p(Δ)、τ(p) 可能不連續。','陰影帶不是沒有能量，而是沒有直接幾何射線。','核心陰影帶就是此概念的重要例子。']},
+      {id:'3.5-1', section:'3.5', file:'3.5-1.png', title:'Fig. 3.5-1｜JB 與 IASP91 地球速度模型', text:'圖中比較經典 Jeffreys–Bullen 模型與 IASP91。可看出上地函、轉換帶、下地函、外核與內核的 P、S 波速度變化。', points:['外核 S 波速度為 0，表示液態。','CMB 處 P 波速度大幅下降。','內核有有限 S 波速度，表示固態。']},
+      {id:'3.5-2', section:'3.5', file:'3.5-2.png', title:'Fig. 3.5-2｜地震圖與相位路徑', text:'上方為長週期垂直分量地震圖，下方畫出相位路徑。不同到時對應 P、S、pP、sP、PP、ScS 等不同震波路徑。', points:['P、S 是直接體波，但路徑不完全相同。','pP、sP 與震源深度有關。','Rayleigh wave 是表面波，通常較晚但振幅大。']},
+      {id:'3.5-3', section:'3.5', file:'3.5-3.png', title:'Fig. 3.5-3｜IASP91 走時曲線與觀測資料', text:'大量地震與爆炸資料的到時點形成不同相位的走時曲線。理論曲線若能貼合資料，就表示速度模型可解釋地球平均構造。', points:['每一條曲線是一個震波相位。','同一距離可能有多個相位到達。','走時表是全球地球模型的重要基礎。']},
+      {id:'3.5-5', section:'3.5', file:'3.5-5.png', title:'Fig. 3.5-5｜體波相位命名規則', text:'此圖用射線路徑整理相位命名。P、S、K、I、J 代表穿越不同介質，c、i、p、s 則表示反射或從震源向上出發。', points:['K 表示 P 波穿越液態外核。','I 表示 P 波穿越固態內核。','c 表示在 CMB 反射，如 ScS、PcP。']},
+      {id:'3.5-12', section:'3.5', file:'3.5-12.png', title:'Fig. 3.5-12｜上地函不連續面與射線 triplication', text:'此圖顯示 410 km 與 660 km 附近速度突增如何讓射線分成多個分支，造成觀測上的 triplication。', points:['速度突增會產生多條可能路徑。','同一震央距可能看到早到與晚到分支。','可用來研究轉換帶厚度與相變深度。']},
+      {id:'3.7-1', section:'3.7', file:'3.7-1.png', title:'Fig. 3.7-1｜區域衰減差異的地震圖比較', text:'比較同一地震在 Nevada 與 Missouri 的紀錄。穿越美國西部活動構造區的波形高頻能量較少，表示衰減較強。', points:['高頻較容易被衰減。','活動造山或伸張區通常 Q 較低。','穩定大陸區通常保留較多高頻。']},
+      {id:'3.7-3', section:'3.7', file:'3.7-3.png', title:'Fig. 3.7-3｜東太平洋海隆速度與衰減剖面', text:'低 P 波速度與高衰減區常被解釋為高溫或部分熔融。圖中的海嶺軸附近低速、高衰減區可對應岩漿房。', points:['低速不一定只代表成分，也可能是高溫。','高 1/Q 代表衰減強。','速度與衰減一起看，比單看速度更有解釋力。']},
+      {id:'3.7-5', section:'3.7', file:'3.7-5.png', title:'Fig. 3.7-5｜速度不均造成多路徑與振幅聚焦', text:'平面波穿過速度不均的透鏡狀區域後，射線距離改變。射線密集處振幅高，射線稀疏處振幅低，局部可形成 caustic。', points:['振幅變大不一定代表震源更強。','速度不均會造成 focusing/defocusing。','若忽略多路徑，可能誤判震源機制或衰減。']},
+      {id:'record', section:'case', file:'record_section.png', title:'2026/5/1｜震波走時圖 record section', text:'此圖把不同測站波形依距離排列，用來觀察同一地震不同相位的到時。斜率可對應射線參數，能量強弱則連結衰減與聚焦。', points:['第一個清楚能量帶常是 P 波。','較慢的 S 波與表面波會在更晚時間出現。','同一相位在不同距離連成走時曲線。']}
+    ];
 
-        function openLightbox(element) {
-            const img = element.querySelector('img');
-            lightboxImg.src = img.src;
-            // 取出藏在 data-desc 裡的詳細解釋
-            lightboxCaption.innerHTML = "<strong>詳細解釋：</strong><br>" + img.getAttribute('data-desc');
-            lightbox.style.display = 'flex';
-        }
+    const quiz = [
+      {q:'折射法中，head wave 要存在，最基本速度條件是什麼？', a:'b', opts:{a:'v0 > v1', b:'v1 > v0', c:'v0 = v1'}},
+      {q:'走時曲線 T(Δ) 的斜率在球形地球中代表什麼？', a:'a', opts:{a:'射線參數 p', b:'地殼厚度 h', c:'品質因子 Q'}},
+      {q:'外核不能傳遞哪一種體波？', a:'b', opts:{a:'P 波', b:'S 波', c:'PKP'}},
+      {q:'反射走時 T(x)^2 = x^2/v^2 + t0^2 的曲線形狀是？', a:'c', opts:{a:'直線', b:'圓形', c:'雙曲線'}},
+      {q:'速度快速增加可能造成同一距離有三個到時，稱為？', a:'a', opts:{a:'triplication', b:'attenuation', c:'stacking'}},
+      {q:'真正把震波能量轉換成熱的是哪一種衰減？', a:'c', opts:{a:'geometric spreading', b:'multipathing', c:'anelasticity'}},
+      {q:'S-wave splitting 通常用來研究什麼？', a:'a', opts:{a:'非均向性', b:'平均密度', c:'震源時間'}},
+      {q:'record section 中，同一相位在不同距離連成的斜線主要代表？', a:'b', opts:{a:'測站高度', b:'走時曲線', c:'岩石顏色'}}
+    ];
 
-        function closeLightbox() {
-            lightbox.style.display = 'none';
-        }
+    function $(id){ return document.getElementById(id); }
 
-        // 點擊背景也能關閉 Lightbox
-        lightbox.addEventListener('click', function(e) {
-            if(e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-    </script>
+    function renderChapterFigures(){
+      const targets = {
+        '3.2': $('figures-32'),
+        '3.4': $('figures-34'),
+        '3.5': $('figures-35'),
+        '3.7': $('figures-37')
+      };
+      Object.values(targets).forEach(el => { if(el) el.innerHTML = ''; });
+      figures.filter(fig => targets[fig.section]).forEach(fig => {
+        const card = document.createElement('article');
+        card.className = 'card fig-card';
+        card.id = `figure-${fig.id}`;
+        card.innerHTML = `<div class="fig-img-wrap" tabindex="0" role="button" aria-label="放大 ${fig.title}"><img src="${imageBase+fig.file}" alt="${fig.title}" loading="lazy"></div><div class="fig-body"><div class="fig-meta"><span class="badge">${fig.section}</span><span class="badge">${fig.id}</span></div><div class="fig-title">${fig.title}</div><p class="small">${fig.text}</p><ul class="fig-points small">${fig.points.map(p=>`<li>${p}</li>`).join('')}</ul></div>`;
+        card.querySelector('.fig-img-wrap').addEventListener('click',()=>openModal(fig));
+        card.querySelector('.fig-img-wrap').addEventListener('keydown',e=>{if(e.key==='Enter')openModal(fig)});
+        targets[fig.section].appendChild(card);
+      });
+    }
+    
+    function openModal(fig){
+      $('modalImg').src = imageBase + fig.file;
+      $('modalImg').alt = fig.title;
+      $('modalTitle').textContent = fig.title;
+      $('modalText').textContent = fig.text;
+      $('modalPoints').innerHTML = fig.points.map(p=>`<li>${p}</li>`).join('');
+      $('modal').classList.add('open');
+    }
 
+    function calcRefraction(){
+      const v0 = parseFloat($('v0').value), v1 = parseFloat($('v1').value), h = parseFloat($('h0').value), x = parseFloat($('distx').value);
+      if(!(v0>0 && v1>0 && h>0 && x>0)){ $('refResult').innerHTML='請輸入正數。'; return; }
+      const TD = x/v0;
+      const TR = 2*Math.sqrt((x*x/4)+(h*h))/v0;
+      let html = `<strong>Direct</strong>：${TD.toFixed(2)} s<br><strong>Reflected</strong>：${TR.toFixed(2)} s<br>`;
+      if(v1 <= v0){ html += `<br>v1 必須大於 v0，否則不會形成標準 head wave。`; $('refResult').innerHTML=html; return; }
+      const ic = Math.asin(v0/v1);
+      const tau = 2*h*Math.sqrt(1/(v0*v0)-1/(v1*v1));
+      const TH = x/v1 + tau;
+      const xc = 2*h*Math.tan(ic);
+      const xd = 2*h*Math.sqrt((v1+v0)/(v1-v0));
+      const times = [{name:'Direct',t:TD},{name:'Reflected',t:TR},{name:'Head',t:TH}].sort((a,b)=>a.t-b.t);
+      html += `<strong>Head</strong>：${TH.toFixed(2)} s<br><strong>臨界角 ic</strong>：${(ic*180/Math.PI).toFixed(1)}°<br><strong>critical distance xc</strong>：${xc.toFixed(1)} km<br><strong>crossover distance xd</strong>：${xd.toFixed(1)} km<br><br>最早到：<strong>${times[0].name}</strong>`;
+      $('refResult').innerHTML=html;
+    }
+
+    function decodePhaseName(){
+      const raw = $('phaseInput').value.trim();
+      const map = {P:'P 波：在固體區域中的壓縮波',S:'S 波：在固體區域中的剪力波',K:'K：P 波穿越液態外核',I:'I：P 波穿越固態內核',J:'J：S 波穿越固態內核',c:'c：在核心—地函邊界 CMB 反射',i:'i：在內核邊界 ICB 反射',p:'p：從震源向上出發的 P 波，於地表反射',s:'s：從震源向上出發的 S 波，於地表轉換或反射',d:'d / diff：沿邊界繞射的波'};
+      let chars = raw.replace(/diff/i,'d').split('');
+      $('phaseOutput').innerHTML = chars.map(ch=>`<div class="phase-token"><b>${ch}</b>：${map[ch] || '此符號需依上下文判讀'}</div>`).join('') || '<p class="small">請輸入相位名稱。</p>';
+    }
+
+    function updateAttenuation(){
+      const Q = parseFloat($('qVal').value), f = parseFloat($('fVal').value), t = parseFloat($('tVal').value);
+      const amp = Math.exp(-Math.PI*f*t/Q);
+      $('attenResult').innerHTML = `Q=${Q.toFixed(0)}，f=${f.toFixed(1)} Hz，t=${t.toFixed(0)} s<br>只考慮 intrinsic attenuation 時，振幅比例約 <strong>${amp.toFixed(3)}</strong>。<br><span class="small">Q 越低、頻率越高、傳播越久，振幅衰減越明顯。</span>`;
+    }
+
+    function renderQuiz(){
+      const box = $('quizBox');
+      box.innerHTML = quiz.map((item,i)=>`<div class="q"><b>${i+1}. ${item.q}</b>${Object.entries(item.opts).map(([k,v])=>`<label><input type="radio" name="q${i}" value="${k}"> ${k.toUpperCase()}. ${v}</label>`).join('')}</div>`).join('');
+    }
+    function checkQuiz(){
+      let score=0;
+      quiz.forEach((item,i)=>{ const chosen=document.querySelector(`input[name="q${i}"]:checked`); if(chosen && chosen.value===item.a) score++; });
+      $('quizScore').textContent = `得分：${score} / ${quiz.length}。${score===quiz.length?'太強了，這章觀念很穩。':score>=5?'不錯，再回去看錯題相關章節會更穩。':'建議先複習 3.2、3.4、3.5 的走時與相位概念。'}`;
+    }
+
+    function updateProgress(){
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      $('progressBar').style.width = `${(h.scrollTop/max)*100}%`;
+      const sections = [...document.querySelectorAll('.section')];
+      let current = sections.findLast(s => s.getBoundingClientRect().top < 120);
+      document.querySelectorAll('.nav a').forEach(a=>a.classList.toggle('active', current && a.getAttribute('href') === '#'+current.id));
+    }
+
+    document.addEventListener('DOMContentLoaded',()=>{
+      renderChapterFigures(); renderQuiz(); calcRefraction(); decodePhaseName(); updateAttenuation(); updateProgress();
+      $('modalClose').addEventListener('click',()=>$('modal').classList.remove('open'));
+      $('modal').addEventListener('click',e=>{ if(e.target.id==='modal') $('modal').classList.remove('open'); });
+      $('calcRef').addEventListener('click',calcRefraction);
+      ['v0','v1','h0','distx'].forEach(id=>$(id).addEventListener('input',calcRefraction));
+      $('decodePhase').addEventListener('click',decodePhaseName); $('phaseInput').addEventListener('input',decodePhaseName);
+      ['qVal','fVal','tVal'].forEach(id=>$(id).addEventListener('input',updateAttenuation));
+      $('checkQuiz').addEventListener('click',checkQuiz);
+      $('themeBtn').addEventListener('click',()=>{ const dark=document.body.dataset.theme!=='dark'; document.body.dataset.theme=dark?'dark':'light'; $('themeBtn').textContent=dark?'淺色':'深色'; });
+      $('velocityCases').addEventListener('click',e=>{ if(e.target.tagName!=='BUTTON')return; document.querySelectorAll('#velocityCases button').forEach(b=>b.classList.remove('active')); e.target.classList.add('active'); const cases={slow:'速度緩慢增加時，T(Δ) 連續且凹向下，p 隨距離增加而減小。這是最基本、最平滑的深部射線行為。',rapid:'速度快速增加時，射線會被快速彎回，造成 triplication：同一距離可能同時有三個相位分支，交會處常有高振幅 caustic。',low:'低速層會讓射線向下彎，造成某段距離沒有直接射線到達，也就是 shadow zone。核心陰影帶可以用這個概念理解。'}; $('caseText').textContent=cases[e.target.dataset.case]; });
+      window.addEventListener('scroll',updateProgress,{passive:true});
+    });
+  </script>
 </body>
 </html>
