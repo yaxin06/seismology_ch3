@@ -7,12 +7,12 @@
   <meta name="description" content="Seismology Chapter 3 interactive learning site: Seismology and Earth Structure, with refraction, reflection, spherical Earth rays, body-wave phases, anisotropy, attenuation, mantle-core composition, and record-section reading." />
   <style>
     :root{
-      --bg:#f6f1e8;
-      --bg2:#efe2cf;
+      --bg:#f4efe6;
+      --bg2:#eee2d0;
       --ink:#1d211d;
       --muted:#667061;
       --card:#fffaf0;
-      --card2:#f7efde;
+      --card2:#f8f0df;
       --line:rgba(63,52,34,.18);
       --accent:#8a5a31;
       --accent2:#426b55;
@@ -21,9 +21,8 @@
       --clay:#a9603b;
       --sand:#d7b98b;
       --sky:#607d8b;
-      --shadow:0 18px 50px rgba(48,38,25,.14);
-      --shadow-soft:0 10px 26px rgba(48,38,25,.08);
-      --radius:26px;
+      --shadow:0 18px 50px rgba(48,38,25,.16);
+      --radius:24px;
       --mono:"SFMono-Regular","Consolas","Liberation Mono",monospace;
       --sans:"Noto Sans TC","Microsoft JhengHei","PingFang TC",system-ui,-apple-system,Segoe UI,sans-serif;
     }
@@ -34,7 +33,7 @@
       --muted:#b8bfad;
       --card:#1b211c;
       --card2:#20281f;
-      --line:rgba(230,220,195,.15);
+      --line:rgba(230,220,195,.16);
       --accent:#d2a365;
       --accent2:#92b99b;
       --accent3:#e0a068;
@@ -42,8 +41,7 @@
       --clay:#cf835b;
       --sand:#bda36e;
       --sky:#8fb1c0;
-      --shadow:0 18px 60px rgba(0,0,0,.34);
-      --shadow-soft:0 10px 28px rgba(0,0,0,.22);
+      --shadow:0 18px 60px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -52,18 +50,10 @@
       font-family:var(--sans);
       color:var(--ink);
       background:
-        radial-gradient(circle at 12% 0%, rgba(178,107,56,.2), transparent 34rem),
-        radial-gradient(circle at 88% 8%, rgba(66,107,85,.16), transparent 34rem),
+        radial-gradient(circle at 12% 0%, rgba(178,107,56,.22), transparent 34rem),
+        radial-gradient(circle at 90% 8%, rgba(66,107,85,.18), transparent 34rem),
         linear-gradient(135deg,var(--bg),var(--bg2));
-      line-height:1.8;
-      position:relative;
-    }
-    body::before{
-      content:"";
-      position:fixed; inset:0; pointer-events:none; opacity:.18; z-index:-1;
-      background-image: radial-gradient(circle at 1px 1px, rgba(70,58,41,.18) 1px, transparent 0);
-      background-size: 24px 24px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,.28), transparent 72%);
+      line-height:1.75;
     }
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
@@ -71,14 +61,13 @@
     .progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent3),var(--accent2));box-shadow:0 0 14px rgba(138,90,49,.35)}
     .topbar{
       position:sticky;top:0;z-index:900;
-      backdrop-filter: blur(18px);
+      backdrop-filter: blur(16px);
       background: color-mix(in srgb, var(--bg) 78%, transparent);
       border-bottom:1px solid var(--line);
-      box-shadow:0 10px 24px rgba(0,0,0,.04);
     }
-    .topbar-inner{max-width:1240px;margin:auto;display:flex;align-items:center;gap:14px;padding:10px 18px;overflow-x:auto}
-    .brand{display:flex;align-items:center;gap:10px;white-space:nowrap;font-weight:900;color:var(--deep);letter-spacing:.02em}
-    .logo{width:34px;height:34px;border-radius:50%;background:conic-gradient(from 200deg,var(--accent2),var(--sand),var(--clay),var(--accent2));box-shadow:inset 0 0 0 5px rgba(255,255,255,.26), 0 8px 16px rgba(0,0,0,.1)}
+    .topbar-inner{max-width:1220px;margin:auto;display:flex;align-items:center;gap:14px;padding:10px 18px;overflow-x:auto}
+    .brand{display:flex;align-items:center;gap:10px;white-space:nowrap;font-weight:900;color:var(--deep)}
+    .logo{width:34px;height:34px;border-radius:50%;background:conic-gradient(from 200deg,var(--accent2),var(--sand),var(--clay),var(--accent2));box-shadow:inset 0 0 0 5px rgba(255,255,255,.26)}
     .nav{display:flex;gap:8px;margin-left:auto;white-space:nowrap}
     .nav a,.pill,.chip,button{
       border:1px solid var(--line);
@@ -88,63 +77,91 @@
       padding:8px 12px;
       font:inherit;
       cursor:pointer;
-      transition:.22s ease;
+      transition:.2s ease;
     }
     .nav a:hover,.nav a.active,.pill:hover,.chip.active,button:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--accent) 50%, var(--line));box-shadow:0 8px 20px rgba(0,0,0,.08)}
-    .nav a.active{background:linear-gradient(135deg, color-mix(in srgb,var(--accent) 18%, var(--card)), color-mix(in srgb,var(--accent2) 16%, var(--card)))}
     .theme-toggle{margin-left:4px}
-    .wrap{max-width:1240px;margin:auto;padding:0 18px 76px}
+    .wrap{max-width:1220px;margin:auto;padding:0 18px 76px}
     .hero{
-      display:grid;grid-template-columns:1.22fr .78fr;gap:30px;align-items:center;padding:72px 0 42px;
+      display:grid;grid-template-columns:1.25fr .75fr;gap:28px;align-items:center;padding:70px 0 46px;
     }
-    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 13px;border-radius:999px;background:rgba(66,107,85,.12);border:1px solid var(--line);font-weight:800;color:var(--accent2);box-shadow:var(--shadow-soft)}
-    h1{font-size:clamp(2.55rem,6vw,5.5rem);line-height:1.02;margin:18px 0 16px;letter-spacing:-.045em;color:var(--deep)}
-    h2{font-size:clamp(1.72rem,3.2vw,2.55rem);line-height:1.18;margin:0 0 14px;color:var(--deep)}
-    h3{font-size:1.35rem;margin:0 0 10px;color:var(--deep)}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:6px 12px;border-radius:999px;background:rgba(66,107,85,.12);border:1px solid var(--line);font-weight:700;color:var(--accent2)}
+    h1{font-size:clamp(2.4rem,6vw,5.4rem);line-height:1.03;margin:20px 0 16px;letter-spacing:-.04em;color:var(--deep)}
+    h2{font-size:clamp(1.7rem,3.2vw,2.55rem);line-height:1.18;margin:0 0 16px;color:var(--deep)}
+    h3{font-size:1.35rem;margin:0 0 8px;color:var(--deep)}
     h4{font-size:1.05rem;margin:0 0 6px;color:var(--deep)}
     .lead{font-size:1.12rem;color:var(--muted);max-width:70ch}
     .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-    .hero-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-    .meta-card{min-width:140px;padding:12px 14px;border-radius:18px;background:color-mix(in srgb,var(--card) 84%, transparent);border:1px solid var(--line);box-shadow:var(--shadow-soft)}
-    .meta-card b{display:block;font-size:1.05rem;color:var(--accent)}
-    .meta-card span{display:block;font-size:.9rem;color:var(--muted)}
     .primary{background:linear-gradient(135deg,var(--accent),var(--accent3));color:#fff;border:0;font-weight:800}
     .secondary{background:rgba(66,107,85,.12);font-weight:750}
-    .hero-visual{min-height:430px;border-radius:40px;background:linear-gradient(160deg,#1e2a22,#4a3324 55%,#c58a55);position:relative;overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.16)}
-    .hero-visual::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 18%, rgba(255,255,255,.16), transparent 20rem)}
+    .hero-visual{min-height:410px;border-radius:38px;background:linear-gradient(160deg,#1e2a22,#4a3324 55%,#c58a55);position:relative;overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.16)}
     .earth{position:absolute;right:-70px;bottom:-120px;width:430px;height:430px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#d6b37e 0 12%,#a15f38 13% 30%,#473827 31% 52%,#263b32 53% 70%,#101714 71%);box-shadow:inset -35px -45px 80px rgba(0,0,0,.45),0 40px 90px rgba(0,0,0,.35)}
-    .ray{position:absolute;height:3px;background:linear-gradient(90deg,transparent,#f8d58f,transparent);transform-origin:left center;box-shadow:0 0 20px rgba(248,213,143,.8);opacity:.82}
+    .ray{position:absolute;height:3px;background:linear-gradient(90deg,transparent,#f8d58f,transparent);transform-origin:left center;box-shadow:0 0 20px rgba(248,213,143,.8);opacity:.8}
     .ray.r1{width:360px;left:24px;top:90px;transform:rotate(18deg)}
     .ray.r2{width:330px;left:18px;top:190px;transform:rotate(-9deg)}
     .ray.r3{width:380px;left:70px;top:290px;transform:rotate(26deg)}
-    .hero-card{position:absolute;left:24px;bottom:24px;right:24px;background:rgba(255,250,240,.92);color:#1e251e;border-radius:24px;padding:18px;box-shadow:0 18px 50px rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.46)}
+    .hero-card{position:absolute;left:24px;bottom:24px;right:24px;background:rgba(255,250,240,.9);color:#1e251e;border-radius:24px;padding:18px;box-shadow:0 18px 50px rgba(0,0,0,.22)}
     .hero-card b{color:#75471f}
     .grid{display:grid;gap:18px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
-    .card{background:color-mix(in srgb,var(--card) 96%, transparent);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;position:relative;overflow:hidden}
-    .card::before{content:"";position:absolute;left:0;top:0;right:0;height:5px;background:linear-gradient(90deg,var(--accent2),var(--accent3));opacity:.8}
-    .card.soft{box-shadow:var(--shadow-soft);background:color-mix(in srgb,var(--card2) 88%, transparent)}
+    .card{background:color-mix(in srgb,var(--card) 96%, transparent);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;position:relative;overflow:hidden}
+    .card.soft{box-shadow:none;background:color-mix(in srgb,var(--card2) 88%, transparent)}
     .kpi{display:flex;gap:12px;align-items:flex-start}.kpi .num{font-family:var(--mono);font-size:1.6rem;font-weight:900;color:var(--accent)}
-    .section{scroll-margin-top:82px;margin:34px 0 0;padding-top:26px}
-    .section-head{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;margin:0 0 14px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
-    .section-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:900;color:var(--accent);letter-spacing:.03em;font-size:.98rem;padding:6px 12px;border-radius:999px;background:rgba(178,107,56,.08);border:1px solid var(--line);margin-bottom:10px}
-    .formula{font-family:var(--mono);background:rgba(66,107,85,.12);border:1px solid var(--line);padding:12px 14px;border-radius:16px;overflow:auto;color:var(--deep);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
-    .note{border-left:4px solid var(--accent2);padding:12px 16px;background:rgba(66,107,85,.10);border-radius:14px;color:var(--muted)}
-    details{border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb,var(--card2) 88%, transparent);padding:12px 14px;box-shadow:var(--shadow-soft)}details+details{margin-top:10px}summary{cursor:pointer;font-weight:850;color:var(--deep)}
-    ul{padding-left:1.25rem}li{margin:.25rem 0}.small{font-size:.92rem;color:var(--muted)}.badge{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:.82rem;color:var(--muted);background:rgba(255,255,255,.28);box-shadow:var(--shadow-soft)}
-    .chapter-map{margin:24px 0 2px}.timeline{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}.timeline a{padding:14px 10px;border-radius:20px;background:color-mix(in srgb,var(--card) 90%, transparent);border:1px solid var(--line);text-align:center;font-weight:850;box-shadow:var(--shadow-soft);transition:.22s}.timeline a:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.timeline a span{display:block;color:var(--muted);font-size:.78rem;font-weight:600}
+    .section{scroll-margin-top:82px;margin:32px 0 0}.section-head{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;margin:0 0 14px}.section-tag{font-family:var(--mono);font-weight:900;color:var(--accent);letter-spacing:.03em}
+    .formula{font-family:var(--mono);background:rgba(66,107,85,.12);border:1px solid var(--line);padding:12px 14px;border-radius:16px;overflow:auto;color:var(--deep)}
+    .note{border-left:4px solid var(--accent2);padding:10px 14px;background:rgba(66,107,85,.10);border-radius:14px;color:var(--muted)}
+    details{border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb,var(--card2) 88%, transparent);padding:12px 14px}details+details{margin-top:10px}summary{cursor:pointer;font-weight:850;color:var(--deep)}
+    ul{padding-left:1.25rem}li{margin:.25rem 0}.small{font-size:.92rem;color:var(--muted)}.badge{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:2px 9px;font-size:.82rem;color:var(--muted);background:rgba(255,255,255,.2)}
+    .chapter-map{margin:26px 0}.timeline{display:grid;grid-template-columns:repeat(8,1fr);gap:8px}.timeline a{padding:14px 10px;border-radius:18px;background:color-mix(in srgb,var(--card) 90%, transparent);border:1px solid var(--line);text-align:center;font-weight:850}.timeline a span{display:block;color:var(--muted);font-size:.78rem;font-weight:600}
     .figure-tools{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 18px}.search{min-width:240px;flex:1;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:10px 14px;color:var(--ink);font:inherit}
-    .fig-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.inline-figures{margin-top:26px;padding-top:8px;border-top:1px dashed var(--line)}.inline-figures-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:8px 0 16px}.fig-points{margin:.65rem 0 0;padding-left:1.15rem}.fig-points li{margin:.16rem 0}.fig-card{padding:0;overflow:hidden;transition:.24s ease}.fig-card:hover{transform:translateY(-3px);box-shadow:0 22px 48px rgba(48,38,25,.16)}.fig-card .fig-body p{margin:.55rem 0}.fig-img-wrap{aspect-ratio:4/3;background:linear-gradient(135deg,rgba(66,107,85,.2),rgba(138,90,49,.12));display:grid;place-items:center;cursor:zoom-in;position:relative;overflow:hidden}.fig-img-wrap::after{content:"放大查看";position:absolute;right:12px;bottom:12px;padding:6px 10px;border-radius:999px;background:rgba(17,17,17,.65);color:#fff;font-size:.78rem;letter-spacing:.03em;opacity:0;transform:translateY(8px);transition:.22s}.fig-card:hover .fig-img-wrap::after{opacity:1;transform:translateY(0)}.fig-card img{width:100%;height:100%;object-fit:contain;padding:10px;transition:.24s}.fig-card:hover img{transform:scale(1.03)}.fig-body{padding:16px 16px 18px}.fig-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}.fig-title{font-weight:900;font-size:1.08rem;color:var(--deep);line-height:1.35}
+    .fig-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.inline-figures{margin-top:22px}.inline-figures-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:8px 0 14px}.fig-points{margin:.65rem 0 0;padding-left:1.15rem}.fig-points li{margin:.15rem 0}.fig-card .fig-body p{margin:.55rem 0}.fig-card{padding:0;overflow:hidden}.fig-img-wrap{aspect-ratio:4/3;background:linear-gradient(135deg,rgba(66,107,85,.18),rgba(138,90,49,.12));display:grid;place-items:center;cursor:zoom-in}.fig-card img{width:100%;height:100%;object-fit:contain;padding:8px}.fig-body{padding:16px}.fig-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}.fig-title{font-weight:900;font-size:1.08rem;color:var(--deep)}
     .modal{position:fixed;inset:0;background:rgba(0,0,0,.74);z-index:1200;display:none;align-items:center;justify-content:center;padding:22px}.modal.open{display:flex}.modal-inner{width:min(1100px,96vw);max-height:92vh;overflow:auto;background:var(--card);border-radius:28px;box-shadow:0 30px 80px rgba(0,0,0,.45);border:1px solid var(--line)}.modal img{width:100%;max-height:68vh;object-fit:contain;background:#111;padding:8px}.modal-content{padding:18px 22px}.modal-close{position:fixed;top:18px;right:18px;background:#fff;color:#111;border:0}
-    .calculator{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}.input-row{display:grid;grid-template-columns:1.1fr .9fr;gap:8px;align-items:center;margin:8px 0}.input-row input,.input-row select{width:100%;padding:9px 10px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}.result{background:linear-gradient(135deg,rgba(66,107,85,.14),rgba(178,107,56,.10));border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow-soft)}.result strong{color:var(--accent)}
-    .raybox{min-height:245px;border-radius:20px;background:linear-gradient(180deg,rgba(66,107,85,.12),rgba(178,107,56,.12));border:1px solid var(--line);position:relative;overflow:hidden;box-shadow:var(--shadow-soft)}.raybox svg{width:100%;height:245px}.toggle-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.toggle-row button.active{background:var(--accent2);color:#fff}
-    .phase-input{display:flex;gap:8px}.phase-input input{flex:1;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:10px 14px;color:var(--ink);font:inherit}.phase-output{margin-top:12px;display:grid;gap:8px}.phase-token{border:1px solid var(--line);background:rgba(66,107,85,.10);border-radius:14px;padding:10px;box-shadow:var(--shadow-soft)}
-    .quiz{display:grid;gap:12px}.q{border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb,var(--card2) 88%, transparent);padding:14px;box-shadow:var(--shadow-soft)}.q label{display:block;margin:6px 0;cursor:pointer}.score{font-weight:900;color:var(--accent)}
-    .footer{margin-top:46px;padding:32px;border-radius:28px;background:linear-gradient(135deg,rgba(40,54,45,.96),rgba(94,62,36,.96));color:#fff;box-shadow:var(--shadow)}.footer .small{color:rgba(255,255,255,.78)}
+    .calculator{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}.input-row{display:grid;grid-template-columns:1.1fr .9fr;gap:8px;align-items:center;margin:8px 0}.input-row input,.input-row select{width:100%;padding:9px 10px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}.result{background:linear-gradient(135deg,rgba(66,107,85,.14),rgba(178,107,56,.10));border:1px solid var(--line);border-radius:18px;padding:14px}.result strong{color:var(--accent)}
+    .raybox{min-height:245px;border-radius:20px;background:linear-gradient(180deg,rgba(66,107,85,.12),rgba(178,107,56,.12));border:1px solid var(--line);position:relative;overflow:hidden}.raybox svg{width:100%;height:245px}.toggle-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.toggle-row button.active{background:var(--accent2);color:#fff}
+    .phase-input{display:flex;gap:8px}.phase-input input{flex:1;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:10px 14px;color:var(--ink);font:inherit}.phase-output{margin-top:12px;display:grid;gap:8px}.phase-token{border:1px solid var(--line);background:rgba(66,107,85,.10);border-radius:14px;padding:10px}
+    .quiz{display:grid;gap:12px}.q{border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb,var(--card2) 88%, transparent);padding:14px}.q label{display:block;margin:6px 0;cursor:pointer}.score{font-weight:900;color:var(--accent)}
+    .footer{margin-top:46px;padding:28px;border-radius:28px;background:linear-gradient(135deg,rgba(40,54,45,.96),rgba(94,62,36,.96));color:#fff}.footer .small{color:rgba(255,255,255,.78)}
     .table{width:100%;border-collapse:collapse;border-radius:16px;overflow:hidden}.table th,.table td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}.table th{background:rgba(66,107,85,.16)}
+
+    /* --- Added teacher-refinement interactive blocks --- */
+    .learning-panel{margin-top:18px}
+    .mini-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
+    .mini-tabs button.active{background:linear-gradient(135deg,var(--accent2),var(--accent));color:#fff;border-color:transparent}
+    .phase-explain-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:stretch}
+    .moho-sketch,.split-sketch,.atten-sketch{min-height:250px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(66,107,85,.10),rgba(178,107,56,.10));overflow:hidden;box-shadow:var(--shadow)}
+    .moho-sketch svg,.split-sketch svg,.atten-sketch svg{width:100%;height:100%;min-height:250px;display:block}
+    .mini-callout{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:start;border:1px solid var(--line);border-radius:18px;background:rgba(66,107,85,.08);padding:12px;margin-top:12px}
+    .mini-callout .icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent2),var(--accent3));color:#fff;font-weight:900}
+    .ray-param-lab{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    .antipode-demo{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:center}
+    .mini-earth{width:220px;height:220px;border-radius:50%;margin:auto;position:relative;background:radial-gradient(circle at 38% 35%,#d8b879 0 10%,#9d623f 11% 35%,#426b55 36% 62%,#1e2a22 63%);box-shadow:inset -24px -28px 54px rgba(0,0,0,.42),0 18px 42px rgba(0,0,0,.15)}
+    .mini-earth::before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed rgba(255,255,255,.55)}
+    .mini-earth::after{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px dashed rgba(255,255,255,.45)}
+    .dot-source,.dot-antipode{position:absolute;width:18px;height:18px;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 6px rgba(255,255,255,.18)}
+    .dot-source{left:28%;top:32%;background:#f0c36f}.dot-antipode{left:72%;top:68%;background:#92b99b}
+    .dot-label{position:absolute;font-size:.8rem;color:#fff;background:rgba(0,0,0,.45);border-radius:999px;padding:2px 7px;white-space:nowrap}.dot-label.source{left:12%;top:18%}.dot-label.anti{right:7%;bottom:17%}
+    .lab-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    .range-row{display:grid;grid-template-columns:1fr .9fr;gap:10px;align-items:center;margin:10px 0}.range-row input[type="range"]{width:100%}
+    .meter{height:16px;border-radius:999px;background:rgba(0,0,0,.08);border:1px solid var(--line);overflow:hidden}.meter span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent2),var(--accent3));transition:.2s}
+    .process-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:12px}
+    .process-card{border:1px solid var(--line);border-radius:18px;padding:12px;background:color-mix(in srgb,var(--card2) 88%, transparent);cursor:pointer;transition:.22s;box-shadow:0 8px 18px rgba(0,0,0,.05)}
+    .process-card.active{background:linear-gradient(135deg,rgba(66,107,85,.18),rgba(178,107,56,.16));border-color:color-mix(in srgb,var(--accent) 45%, var(--line));transform:translateY(-2px)}
+    .process-card b{display:block;color:var(--deep);margin-bottom:4px}
+    .atten-lab-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .ampbar{height:22px;border-radius:999px;border:1px solid var(--line);background:rgba(0,0,0,.08);overflow:hidden;margin:10px 0}.ampbar span{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--accent3),var(--accent2));transition:.24s}
+    .mantle-model{display:grid;grid-template-columns:.8fr 1.2fr;gap:18px;align-items:start;margin-top:18px}
+    .mantle-column{height:470px;border-radius:26px;border:1px solid var(--line);overflow:hidden;position:relative;box-shadow:var(--shadow);background:linear-gradient(to bottom,#6d8d73 0 16%,#7a956d 16% 42%,#b28a58 42% 66%,#85543a 66% 100%)}
+    .mantle-column .layer{position:absolute;left:0;right:0;padding:8px 12px;color:#fff;font-size:.86rem;text-shadow:0 1px 3px rgba(0,0,0,.45);border-top:1px solid rgba(255,255,255,.35)}
+    .mantle-column .l410{top:58.6%}.mantle-column .l520{top:74.3%}.mantle-column .l660{top:94.3%}
+    .depth-pointer{position:absolute;left:0;right:0;height:3px;background:#fff;box-shadow:0 0 0 4px rgba(0,0,0,.18),0 0 18px rgba(255,255,255,.8);top:0;transition:.22s}.depth-pointer::after{content:"目前深度";position:absolute;right:8px;top:-28px;background:rgba(0,0,0,.55);color:#fff;border-radius:999px;padding:2px 8px;font-size:.78rem}
+    .mineral-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.mineral-buttons button.active{background:var(--accent2);color:#fff}
+    .composition-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}.composition-card{border:1px solid var(--line);border-radius:18px;padding:14px;background:color-mix(in srgb,var(--card2) 88%, transparent);box-shadow:0 8px 18px rgba(0,0,0,.05)}.composition-card b{color:var(--accent)}
+    @media (max-width:960px){.phase-explain-grid,.ray-param-lab,.antipode-demo,.lab-grid,.mantle-model{grid-template-columns:1fr}.process-grid,.atten-lab-controls,.composition-grid{grid-template-columns:1fr 1fr}.mini-earth{width:200px;height:200px}}
+    @media (max-width:640px){.process-grid,.atten-lab-controls,.composition-grid{grid-template-columns:1fr}.range-row{grid-template-columns:1fr}.phase-input{display:grid}}
+
     @media (max-width:960px){.hero{grid-template-columns:1fr}.grid.two,.grid.three,.grid.four,.calculator{grid-template-columns:1fr}.fig-grid{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:repeat(4,1fr)}}
-    @media (max-width:640px){.fig-grid{grid-template-columns:1fr}.timeline{grid-template-columns:repeat(2,1fr)}.section-head{display:block}.hero{padding-top:40px}.hero-visual{min-height:340px}.earth{width:330px;height:330px}.nav{display:none}.hero-meta{gap:8px}.meta-card{min-width:calc(50% - 4px)}}
+    @media (max-width:640px){.fig-grid{grid-template-columns:1fr}.timeline{grid-template-columns:repeat(2,1fr)}.section-head{display:block}.hero{padding-top:40px}.hero-visual{min-height:330px}.earth{width:330px;height:330px}.nav{display:none}}
     @media print{.topbar,.progress,.hero-actions,.figure-tools,.modal,.theme-toggle{display:none!important}body{background:#fff}.card{break-inside:avoid;box-shadow:none}.section{page-break-inside:avoid}.fig-grid{grid-template-columns:repeat(2,1fr)}}
-</style>
+  </style>
 </head>
 <body>
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
@@ -168,11 +185,6 @@
           <a class="pill primary" href="#s31">開始學習</a>
           <a class="pill secondary" href="#s32">依章節查看指定圖片</a>
           <a class="pill" href="#quiz">章末小測</a>
-        </div>
-        <div class="hero-meta">
-          <div class="meta-card"><b>3.1–3.8</b><span>完整章節整理</span></div>
-          <div class="meta-card"><b>16 張圖</b><span>皆嵌入對應章節</span></div>
-          <div class="meta-card"><b>互動學習</b><span>計算器、解碼器、小測驗</span></div>
         </div>
       </div>
       <div class="hero-visual" aria-label="地球內部震波示意">
@@ -244,6 +256,48 @@
           <div class="result" id="refResult">輸入參數後按下計算。</div>
         </div>
       </div>
+
+      <div class="learning-panel card soft">
+        <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0">
+          <div>
+            <h3>新增互動：Pg、PmP、Pn 與莫氏不連續面</h3>
+            <p class="small">同一張折射剖面中，Pg、PmP、Pn 分別對應直達、反射與首波。這三者的到時差，是理解 Moho 的關鍵。</p>
+          </div>
+          <span class="badge">Moho phases</span>
+        </div>
+        <div class="phase-explain-grid">
+          <div>
+            <div class="mini-tabs" id="mohoPhaseTabs">
+              <button type="button" class="active" data-phase="Pg">Pg 直達波</button>
+              <button type="button" data-phase="PmP">PmP 反射波</button>
+              <button type="button" data-phase="Pn">Pn 首波／折射波</button>
+            </div>
+            <div id="mohoPhaseText" class="result"></div>
+            <div class="mini-callout">
+              <div class="icon">M</div>
+              <div>
+                <h4>為什麼莫氏不連續面是由折射法發現的？</h4>
+                <p class="small">如果地下只有單一均勻地殼，遠距離測站不應該突然出現一條斜率較小、代表速度較快的到時線。但 Mohorovičić 觀察到遠距離 P 波比原本預期更早到，表示震波有一段沿著較深、較快的介質傳播。這個由折射定律推論出的高速界面，就是地殼與地函之間的莫氏不連續面。</p>
+              </div>
+            </div>
+          </div>
+          <div class="moho-sketch" aria-label="Pg PmP Pn 示意圖">
+            <svg viewBox="0 0 720 300">
+              <rect x="0" y="0" width="720" height="145" fill="rgba(66,107,85,.13)"></rect>
+              <rect x="0" y="145" width="720" height="155" fill="rgba(178,107,56,.16)"></rect>
+              <line x1="0" y1="145" x2="720" y2="145" stroke="currentColor" stroke-width="2" stroke-dasharray="10 7" opacity=".6"></line>
+              <text x="18" y="132" fill="currentColor">地殼：較慢 v₀</text><text x="18" y="174" fill="currentColor">地函頂部：較快 v₁</text><text x="560" y="137" fill="currentColor">Moho</text>
+              <circle cx="70" cy="58" r="9" fill="var(--accent3)"></circle><circle cx="650" cy="58" r="9" fill="var(--accent2)"></circle>
+              <text x="44" y="38" fill="currentColor">震源</text><text x="620" y="38" fill="currentColor">測站</text>
+              <path id="svgPg" d="M70 58 C240 48 480 48 650 58" stroke="#5f8d69" stroke-width="6" fill="none" stroke-linecap="round"></path>
+              <path id="svgPmP" d="M70 58 Q360 240 650 58" stroke="#b26b38" stroke-width="6" fill="none" stroke-linecap="round" opacity=".78"></path>
+              <path id="svgPn" d="M70 58 L190 145 L530 145 L650 58" stroke="#e0a84f" stroke-width="6" fill="none" stroke-linecap="round" opacity=".95"></path>
+              <text x="330" y="46" fill="currentColor" font-weight="700">Pg</text><text x="334" y="238" fill="currentColor" font-weight="700">PmP</text><text x="335" y="133" fill="currentColor" font-weight="700">Pn</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
       <div class="grid two" style="margin-top:18px">
         <div class="raybox"><svg viewBox="0 0 700 245" role="img" aria-label="直接波反射波頭波示意">
           <rect x="0" y="0" width="700" height="115" fill="rgba(66,107,85,.11)"/><rect x="0" y="115" width="700" height="130" fill="rgba(178,107,56,.13)"/><line x1="0" y1="115" x2="700" y2="115" stroke="currentColor" stroke-width="2" stroke-dasharray="8 6" opacity=".55"/>
@@ -304,6 +358,76 @@
           <div id="caseText" class="result" style="margin-top:12px">速度緩慢增加時，T(Δ) 連續且凹向下，p 隨距離增加而減小。</div>
         </div>
       </div>
+
+      <div class="learning-panel card soft">
+        <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0"><div><h3>新增互動：射線參數 Ray Parameter 與地震對蹠點</h3><p class="small">球形地球中，射線參數 p 是理解震波路徑、走時曲線斜率與視速度的共同語言。</p></div><span class="badge">p = dT/dΔ</span></div>
+        <div class="ray-param-lab">
+          <div>
+            <h4>Ray Parameter 怎麼讀？</h4>
+            <p>射線參數可寫成 <b>p = r sin i / v</b>，也可由走時曲線斜率取得：<b>p = dT/dΔ</b>。同一條射線在傳播過程中 p 保持不變，因此它像是這條震波路徑的「身分證」。</p>
+            <div class="formula">p 小 → 射線通常穿得更深；p 大 → 射線較貼近淺部。</div>
+            <div class="input-row"><label>兩測站到時差 dT（秒）</label><input id="dtRay" type="number" value="60" step="1"></div>
+            <div class="input-row"><label>震央距差 dΔ（度）</label><input id="ddRay" type="number" value="8" step="0.5"></div>
+            <button id="calcRayP" class="primary" type="button">計算射線參數</button><div id="rayPResult" class="result" style="margin-top:10px"></div>
+          </div>
+          <div>
+            <h4>地震對蹠點 Antipode</h4>
+            <p>地震對蹠點是震央在地球正對面的點，震央距為 180°。在理想均勻球形地球中，表面波會在對蹠點附近重新聚焦，所以振幅可能變大；但真實地球的橢球形狀與橫向不均質會讓聚焦變得複雜。</p>
+            <div class="antipode-demo"><div class="mini-earth" aria-label="地震對蹠點示意"><span class="dot-source"></span><span class="dot-antipode"></span><span class="dot-label source">震央</span><span class="dot-label anti">對蹠點</span></div><div><div class="input-row"><label>震央緯度</label><input id="epiLat" type="number" value="23.5" step="0.1"></div><div class="input-row"><label>震央經度</label><input id="epiLon" type="number" value="121.0" step="0.1"></div><button id="calcAntipode" class="primary" type="button">換算對蹠點</button><div id="antipodeResult" class="result" style="margin-top:10px"></div></div></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="learning-panel card soft">
+        <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0">
+          <div>
+            <h3>新增互動：古氏不連續面與地震陰影帶</h3>
+            <p class="small">古氏不連續面，也就是核心—地函邊界 CMB，並不是直接被看見，而是透過遠震走時與陰影帶推論出來。</p>
+          </div>
+          <span class="badge">Gutenberg discontinuity</span>
+        </div>
+        <div class="grid two">
+          <div>
+            <p><b>古氏不連續面</b>位於約 2900 km 深處，是固態地函與液態外核的邊界。地震學家發現，在某些震央距範圍內，直接 P 波會明顯消失或變弱，而 S 波更無法穿越外核，這種「該出現卻沒有直接波」的區域稱為 <b>seismic shadow zone</b>。</p>
+            <div class="mini-tabs" id="gutenbergTabs">
+              <button type="button" class="active" data-gutenberg="p">P 波陰影帶</button>
+              <button type="button" data-gutenberg="s">S 波陰影帶</button>
+              <button type="button" data-gutenberg="cmb">古氏不連續面</button>
+            </div>
+            <div id="gutenbergText" class="result"></div>
+            <div class="mini-callout">
+              <div class="icon">G</div>
+              <div>
+                <h4>為什麼陰影帶能指出核心邊界？</h4>
+                <p class="small">如果地球內部速度只是平滑增加，走時曲線應該較連續；但觀測顯示約 103° 到 142° 間缺少直接 P 波，代表震波遇到一個速度劇烈改變的界面並被強烈折射。再加上 S 波無法通過該深部區域，說明外核是液態，這就是推論古氏不連續面的關鍵證據。</p>
+              </div>
+            </div>
+          </div>
+          <div class="moho-sketch" aria-label="古氏不連續面與陰影帶示意">
+            <svg viewBox="0 0 720 300">
+              <rect x="0" y="0" width="720" height="300" fill="rgba(66,107,85,.08)"></rect>
+              <circle cx="360" cy="150" r="124" fill="rgba(66,107,85,.18)" stroke="currentColor" stroke-width="2" opacity=".65"></circle>
+              <circle cx="360" cy="150" r="56" fill="rgba(178,107,56,.28)" stroke="currentColor" stroke-width="2" stroke-dasharray="8 6"></circle>
+              <circle cx="360" cy="150" r="28" fill="rgba(220,160,104,.32)" stroke="currentColor" stroke-width="1" opacity=".7"></circle>
+              <text x="320" y="84" fill="currentColor" font-weight="700">地函</text>
+              <text x="332" y="154" fill="currentColor" font-weight="700">外核</text>
+              <text x="326" y="186" fill="currentColor" font-size="13">CMB / 古氏不連續面</text>
+              <circle cx="262" cy="74" r="7" fill="var(--accent3)"></circle>
+              <text x="220" y="58" fill="currentColor">震央</text>
+              <path d="M262 74 C250 130 270 207 330 251" stroke="#92b99b" stroke-width="4" fill="none" stroke-linecap="round"></path>
+              <path d="M262 74 C380 112 420 190 526 226" stroke="#e0a84f" stroke-width="4" fill="none" stroke-linecap="round"></path>
+              <path d="M262 74 C330 82 410 82 480 74" stroke="#d9a24c" stroke-width="3" fill="none" stroke-linecap="round" opacity=".55"></path>
+              <path d="M498 55 A124 124 0 0 1 565 189" stroke="rgba(220,80,60,.85)" stroke-width="14" fill="none" stroke-linecap="round" opacity=".45"></path>
+              <text x="510" y="116" fill="currentColor" font-weight="700">P shadow zone</text>
+              <text x="494" y="138" fill="currentColor" font-size="13">約 103°–142°</text>
+              <path d="M360 26 A124 124 0 1 1 360 274" stroke="rgba(120,120,120,.25)" stroke-width="10" fill="none"></path>
+              <text x="32" y="272" fill="currentColor" font-size="13">示意圖：P 波因液態外核低速而強烈折射；S 波不能穿越液態外核。</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
       <div class="inline-figures">
         <div class="inline-figures-head"><div><h3>3.4 指定圖片｜球形地球中的射線與走時曲線</h3><p class="small">這三張圖對應速度平滑增加、速度快速增加與低速層，重點是看 T(Δ)、p(Δ) 與陰影帶如何被速度構造控制。</p></div><span class="badge">3 figures</span></div>
         <div id="figures-34" class="fig-grid"></div>
@@ -346,7 +470,15 @@
         <div class="card soft"><h3>LPO</h3><p><b>Lattice-preferred orientation</b>：礦物晶格被流動或應力排列。例如橄欖石在上地函中的排列，可反映板塊運動與地函流動。</p></div>
         <div class="card soft"><h3>Shear-wave splitting</h3><p>S 波進入非均向介質後分裂為快、慢兩個偏振方向，兩者到時差可用來推測非均向強度與快軸方向。</p></div>
       </div>
-      <p class="note">非均向性通常比地球徑向速度變化小，但在研究板塊底部流動、D″ 層與內核結構時非常關鍵。</p>
+
+      <div class="learning-panel card soft">
+        <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0"><div><h3>新增互動：S 波分裂與非均向來源</h3><p class="small">非均向性不只是名詞，而是可以被地震圖觀測到的時間差與偏振方向。</p></div><span class="badge">anisotropy lab</span></div>
+        <div class="lab-grid"><div><h4>選擇非均向來源</h4><div class="mini-tabs" id="anisotropyMode"><button type="button" class="active" data-mode="iso">均向介質</button><button type="button" data-mode="spo">SPO 層狀構造</button><button type="button" data-mode="lpo">LPO 橄欖石排列</button><button type="button" data-mode="crack">裂隙／流體</button></div><div id="anisotropyText" class="result"></div><div class="range-row"><label>非均向強度 A（%）</label><input id="aniPercent" type="range" min="0" max="12" value="4" step="0.5"></div><div class="range-row"><label>路徑長度 L（km）</label><input id="aniLength" type="range" min="20" max="400" value="120" step="10"></div><div class="range-row"><label>平均 S 波速度 Vs（km/s）</label><input id="aniVs" type="range" min="3" max="5.5" value="4.2" step="0.1"></div><div id="splitResult" class="result"></div></div>
+          <div class="split-sketch" aria-label="S wave splitting 示意"><svg viewBox="0 0 720 300"><rect x="0" y="0" width="720" height="300" fill="rgba(66,107,85,.08)"></rect><rect x="240" y="0" width="240" height="300" fill="rgba(178,107,56,.13)"></rect><text x="40" y="36" fill="currentColor">均向</text><text x="298" y="36" fill="currentColor">非均向區</text><text x="555" y="36" fill="currentColor">分裂後</text><line x1="30" y1="150" x2="690" y2="150" stroke="currentColor" stroke-width="2" opacity=".25"></line><path d="M40 150 C70 95 100 205 130 150 S190 95 220 150" stroke="#d9a24c" stroke-width="5" fill="none" stroke-linecap="round"></path><path id="fastPulse" d="M500 122 C530 70 560 174 590 122 S650 70 680 122" stroke="#92b99b" stroke-width="5" fill="none" stroke-linecap="round"></path><path id="slowPulse" d="M500 185 C530 132 560 236 590 185 S650 132 680 185" stroke="#e0a068" stroke-width="5" fill="none" stroke-linecap="round"></path><text x="505" y="105" fill="currentColor">Fast S1</text><text x="505" y="214" fill="currentColor">Slow S2</text><path d="M260 70 L460 230 M260 230 L460 70" stroke="currentColor" opacity=".18" stroke-width="8"></path></svg></div>
+        </div>
+      </div>
+
+            <p class="note">非均向性通常比地球徑向速度變化小，但在研究板塊底部流動、D″ 層與內核結構時非常關鍵。</p>
     </section>
 
     <section id="s37" class="section card">
@@ -369,7 +501,16 @@
           <div id="attenResult" class="result">調整滑桿查看振幅比例。</div>
         </div>
       </div>
-      <p class="note">高溫、部分熔融或流體通常會提高衰減，因此速度低且 Q 低的區域常被解釋為較熱或有熔體。</p>
+
+      <div class="learning-panel card soft">
+        <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0"><div><h3>新增互動：四種原因如何讓震波變弱？</h3><p class="small">振幅變小不一定等於能量被吸收。先分清楚「能量被重新分配」與「能量真的變成熱」。</p></div><span class="badge">attenuation lab</span></div>
+        <div class="process-grid" id="attenProcesses"><div class="process-card active" data-process="geo"><b>幾何擴散</b><span class="small">波前變大，單位面積能量下降。</span></div><div class="process-card active" data-process="scat"><b>散射</b><span class="small">小尺度不均質造成 coda。</span></div><div class="process-card active" data-process="multi"><b>多路徑</b><span class="small">速度透鏡造成聚焦或散焦。</span></div><div class="process-card active" data-process="anel"><b>非彈性</b><span class="small">震波能量轉為熱，真正耗散。</span></div></div>
+        <div class="lab-grid" style="margin-top:16px"><div><div class="atten-lab-controls"><div><label class="small">距離 r（km）</label><input id="attDistance" type="range" min="50" max="1200" value="300" step="10"></div><div><label class="small">不均質程度</label><input id="attHetero" type="range" min="0" max="100" value="35" step="1"></div><div><label class="small">聚焦/散焦</label><input id="attFocus" type="range" min="-50" max="50" value="-10" step="1"></div></div><div class="ampbar"><span id="ampBar"></span></div><div id="attenLabResult" class="result"></div></div>
+          <div class="atten-sketch" aria-label="衰減概念示意"><svg viewBox="0 0 720 300"><rect x="0" y="0" width="720" height="300" fill="rgba(66,107,85,.08)"></rect><circle cx="90" cy="150" r="12" fill="var(--accent3)"></circle><text x="52" y="132" fill="currentColor">震源</text><circle cx="90" cy="150" r="55" fill="none" stroke="currentColor" opacity=".18" stroke-width="3"></circle><circle cx="90" cy="150" r="105" fill="none" stroke="currentColor" opacity=".14" stroke-width="3"></circle><circle cx="90" cy="150" r="155" fill="none" stroke="currentColor" opacity=".10" stroke-width="3"></circle><path id="attenWave" d="M210 150 C235 80 260 220 285 150 S335 80 360 150 S410 80 435 150 S485 80 510 150 S560 80 585 150 S635 80 660 150" stroke="#d9a24c" stroke-width="6" fill="none" stroke-linecap="round"></path><g opacity=".58"><circle cx="330" cy="95" r="5" fill="var(--accent2)"></circle><circle cx="405" cy="210" r="4" fill="var(--accent2)"></circle><circle cx="520" cy="96" r="6" fill="var(--accent2)"></circle><circle cx="600" cy="220" r="5" fill="var(--accent2)"></circle></g><text x="300" y="36" fill="currentColor">擴散 + 散射 + 多路徑 + 非彈性</text></svg></div>
+        </div>
+      </div>
+
+            <p class="note">高溫、部分熔融或流體通常會提高衰減，因此速度低且 Q 低的區域常被解釋為較熱或有熔體。</p>
       <div class="inline-figures">
         <div class="inline-figures-head"><div><h3>3.7 指定圖片｜衰減、Q 值與速度不均</h3><p class="small">以下圖片放在衰減章節中，分別用地震圖、速度/衰減剖面與多路徑示意說明振幅為何會改變。</p></div><span class="badge">3 figures</span></div>
         <div id="figures-37" class="fig-grid"></div>
@@ -391,13 +532,29 @@
             <li>核心成分：接近鐵，但純鐵太重，因此通常推測含較輕元素。</li>
           </ul>
         </div>
+
+      </div>
+      <div class="learning-panel card soft">
+        <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0"><div><h3>新增互動：410、520、660 km 不連續面與地函礦物相變</h3><p class="small">地函不是單純「越深越快」，速度突增常與礦物晶體結構改變、密度增加有關。</p></div><span class="badge">mantle transition zone</span></div>
+        <div class="mantle-model"><div class="mantle-column" aria-label="地函轉換帶深度示意"><div id="depthPointer" class="depth-pointer"></div><div class="layer l410">410 km：橄欖石 → Wadsleyite</div><div class="layer l520">520 km：Wadsleyite → Ringwoodite</div><div class="layer l660">660 km：Ringwoodite → Bridgmanite + Periclase</div></div>
+          <div><h4>互動：拖曳深度或直接點選不連續面</h4><div class="range-row"><label>深度（km）</label><input id="mantleDepth" type="range" min="0" max="700" value="410" step="5"></div><div class="mineral-buttons" id="mineralButtons"><button type="button" class="active" data-depth="410">410 km</button><button type="button" data-depth="520">520 km</button><button type="button" data-depth="660">660 km</button></div><div id="mantleResult" class="result"></div><div class="composition-grid"><div class="composition-card"><b>上地函</b><p class="small">以橄欖石、輝石、石榴子石等矽酸鹽礦物為主，速度受溫度、壓力與礦物排列影響。</p></div><div class="composition-card"><b>外核</b><p class="small">液態鐵鎳合金並含較輕元素；S 波速度為 0，是判斷液態外核的重要證據。</p></div><div class="composition-card"><b>內核</b><p class="small">固態鐵鎳合金，因高壓保持固態；可傳有限 S 波，且可能具有非均向性。</p></div></div></div>
+        </div>
       </div>
     </section>
 
     <section id="record" class="section card">
       <div class="section-head"><div><div class="section-tag">Final Case Study</div><h2>2026/5/1 地震震波走時圖：Record Section 怎麼讀？</h2></div><span class="badge">最後案例</span></div>
       <div class="grid two">
-        <div class="fig-img-wrap" style="aspect-ratio:4/3;border-radius:20px;border:1px solid var(--line)"><img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/record_section.png" alt="2026年5月1日地震 record section 震波走時圖"></div>
+        <article class="card fig-card" style="padding:0">
+          <div id="recordFigureWrap" class="fig-img-wrap" tabindex="0" role="button" aria-label="放大 2026年5月1日地震 record section 震波走時圖">
+            <img src="https://raw.githubusercontent.com/yaxin06/seismology_ch3/main/record_section.png" alt="2026年5月1日地震 record section 震波走時圖" loading="lazy">
+          </div>
+          <div class="fig-body">
+            <div class="fig-meta"><span class="badge">Final Case</span><span class="badge">record section</span></div>
+            <div class="fig-title">2026/5/1｜震波走時圖 record section</div>
+            <p class="small">點擊圖片即可像前面章節圖片一樣放大查看，並對照右側說明閱讀 P 波、S 波與不同能量帶。</p>
+          </div>
+        </article>
         <div>
           <p>這張圖是 2026/5/1 地震的 <b>record section</b>。record section 的概念是：把不同測站的地震波形依震央距排列，形成一張「距離—時間」圖。每一條 wiggle 是一個測站記錄，斜向排列的能量帶就是同一個震波相位在不同距離的到時。</p>
           <ul>
@@ -541,8 +698,33 @@
       document.querySelectorAll('.nav a').forEach(a=>a.classList.toggle('active', current && a.getAttribute('href') === '#'+current.id));
     }
 
+
+    function updateMohoPhase(){
+      const info={Pg:{title:'Pg｜地殼中的直達 P 波',text:'Pg 主要在地殼內傳播，近距離時因路徑最短通常最早到。走時圖上 Pg 的斜率約為 1/地殼 P 波速度。'},PmP:{title:'PmP｜Moho 反射 P 波',text:'PmP 是 P 波向下傳到 Moho 後反射回地表。因為是反射波，走時曲線通常呈雙曲線，可幫助估計 Moho 深度。'},Pn:{title:'Pn｜沿 Moho 附近傳播的首波／折射波',text:'Pn 是達到臨界角後沿地函頂部高速層傳播的頭波。遠距離時，Pn 可能比 Pg 更早到，這正是顯示地殼下方存在高速地函的重要證據。'}};
+      const active=document.querySelector('#mohoPhaseTabs button.active'); if(!active||!$('mohoPhaseText')) return; const key=active.dataset.phase; $('mohoPhaseText').innerHTML=`<strong>${info[key].title}</strong><br>${info[key].text}`;
+      ['svgPg','svgPmP','svgPn'].forEach(id=>{const el=$(id); if(el){el.style.opacity='.18'; el.style.strokeWidth='5';}}); const target=key==='Pg'?'svgPg':key==='PmP'?'svgPmP':'svgPn'; if($(target)){ $(target).style.opacity='1'; $(target).style.strokeWidth='8'; }
+    }
+    function calcRayParameter(){ if(!$('dtRay')||!$('ddRay')||!$('rayPResult')) return; const dT=parseFloat($('dtRay').value),dD=parseFloat($('ddRay').value); if(!(dT>0&&dD>0)){$('rayPResult').innerHTML='請輸入正數。';return;} const pDeg=dT/dD,pRad=pDeg*180/Math.PI,c=6371/pRad; $('rayPResult').innerHTML=`p ≈ <strong>${pDeg.toFixed(2)} s/degree</strong><br>換成弧度單位：<strong>${pRad.toFixed(1)} s/radian</strong><br>表面視速度 c ≈ <strong>${c.toFixed(2)} km/s</strong><br><span class="small">p 是走時曲線斜率；在球形地球中也等於 r sin i / v。</span>`; }
+    function calcAntipode(){ if(!$('epiLat')||!$('epiLon')||!$('antipodeResult')) return; const lat=parseFloat($('epiLat').value),lon=parseFloat($('epiLon').value); if(!(lat>=-90&&lat<=90&&lon>=-180&&lon<=180)){$('antipodeResult').innerHTML='緯度需介於 -90 到 90，經度需介於 -180 到 180。';return;} const alat=-lat; let alon=lon+180; if(alon>180) alon-=360; $('antipodeResult').innerHTML=`對蹠點約為：<br><strong>${alat.toFixed(1)}°</strong> 緯度，<strong>${alon.toFixed(1)}°</strong> 經度<br><span class="small">它與震央的震央距為 180°，是地球正對面的位置。</span>`; }
+    function updateAnisotropy(){ if(!$('anisotropyText')||!$('splitResult')) return; const active=document.querySelector('#anisotropyMode button.active'),mode=active?active.dataset.mode:'iso'; const descriptions={iso:'均向介質中，S 波不會因方向不同而分成快、慢兩個偏振波；理想情況下只有一個到時。',spo:'SPO 來自層狀構造、片理或裂隙的形狀排列。震波平行層面或垂直層面傳播時，等效彈性不同。',lpo:'LPO 來自礦物晶格排列，例如上地函橄欖石受地函流動影響而形成快軸，可用來推估板塊下方流動方向。',crack:'裂隙或流體會使某一方向較弱或較慢，火山區、斷層帶與含流體地殼常需要考慮這類非均向。'}; let A=parseFloat($('aniPercent').value),L=parseFloat($('aniLength').value),Vs=parseFloat($('aniVs').value); if(mode==='iso') A=0; const vFast=Vs*(1+A/200),vSlow=Vs*(1-A/200),dt=L/vSlow-L/vFast; $('anisotropyText').innerHTML=descriptions[mode]; $('splitResult').innerHTML=`目前設定：A=<strong>${A.toFixed(1)}%</strong>，L=<strong>${L.toFixed(0)} km</strong>，Vs=<strong>${Vs.toFixed(1)} km/s</strong><br>快波速度 ≈ ${vFast.toFixed(2)} km/s，慢波速度 ≈ ${vSlow.toFixed(2)} km/s<br>S 波分裂時間差 δt ≈ <strong>${dt.toFixed(2)} 秒</strong>`; if($('fastPulse')&&$('slowPulse')){ $('fastPulse').style.transform=`translateX(${Math.min(12,A*.9)}px)`; $('slowPulse').style.transform=`translateX(${-Math.min(18,A*1.2)}px)`; }}
+    function updateAttenuationLab(){ if(!$('attenLabResult')||!$('ampBar')) return; const active={}; document.querySelectorAll('#attenProcesses .process-card').forEach(card=>active[card.dataset.process]=card.classList.contains('active')); const r=parseFloat($('attDistance').value),hetero=parseFloat($('attHetero').value),focus=parseFloat($('attFocus').value); let amp=1,notes=[]; if(active.geo){amp*=Math.min(1,100/r);notes.push('幾何擴散：距離越遠，單位波前能量越小');} if(active.scat){amp*=Math.exp(-(hetero/100)*1.1);notes.push('散射：不均質越強，主到時能量越容易進入 coda');} if(active.multi){amp*=Math.max(.25,1+focus/100);notes.push(focus>=0?'多路徑聚焦：局部振幅被放大':'多路徑散焦：局部振幅被削弱');} if(active.anel&&$('qVal')){const Q=parseFloat($('qVal').value),f=parseFloat($('fVal').value),t=parseFloat($('tVal').value);amp*=Math.exp(-Math.PI*f*t/Q);notes.push('非彈性：能量轉為熱，屬於真正耗散');} amp=Math.max(0,Math.min(1.2,amp)); $('ampBar').style.width=`${Math.min(100,amp*100)}%`; $('attenLabResult').innerHTML=`相對振幅約 <strong>${amp.toFixed(3)}</strong><br><span class="small">${notes.join('；')}。</span>`; if($('attenWave')) $('attenWave').style.opacity=String(Math.max(.18,Math.min(1,amp+.15))); }
+    function updateMantleDepth(){ if(!$('mantleDepth')||!$('mantleResult')||!$('depthPointer')) return; const d=parseFloat($('mantleDepth').value); $('depthPointer').style.top=`${Math.min(99,d/700*100)}%`; let title='',text=''; if(d<410){title='0–410 km｜上地函橄欖石穩定區';text='此區以橄欖石等矽酸鹽礦物為主。速度會隨壓力增加而逐漸變快，但仍會受溫度與部分熔融影響。';} else if(d<520){title='約 410 km｜橄欖石 → Wadsleyite';text='橄欖石轉為較高壓、較緻密的 wadsleyite，造成密度與 P、S 波速度增加，因此在走時與接收函數中形成明顯不連續面。';} else if(d<660){title='約 520 km｜Wadsleyite → Ringwoodite';text='520 km 附近常被解釋為 wadsleyite 轉為 ringwoodite，訊號通常比 410 與 660 km 弱，但能提供轉換帶礦物結構資訊。';} else {title='約 660 km｜Ringwoodite → Bridgmanite + Periclase';text='ringwoodite 分解或轉變為 bridgmanite（鈣鈦礦結構）與 ferropericlase/periclase，使密度與速度再度跳升，標示上、下地函的重要邊界。';} $('mantleResult').innerHTML=`<strong>${title}</strong><br>${text}<br><span class="small">深度：${d.toFixed(0)} km。這些相變說明地球速度不連續面不只是幾何邊界，也反映礦物結構改變。</span>`; document.querySelectorAll('#mineralButtons button').forEach(btn=>btn.classList.toggle('active',Math.abs(parseFloat(btn.dataset.depth)-d)<8)); }
+
+
+    function updateGutenberg(){
+      if(!$('gutenbergText')) return;
+      const active = document.querySelector('#gutenbergTabs button.active');
+      const key = active ? active.dataset.gutenberg : 'p';
+      const data = {
+        p: '<strong>P 波陰影帶</strong><br>P 波進入液態外核時，因外核 P 波速度比下地函低很多，射線被強烈折射，導致約 103°–142° 的震央距缺少直接 P 波。這個空白區域就是推論核心邊界的重要證據。',
+        s: '<strong>S 波陰影帶</strong><br>S 波不能在液體中傳播，因此 S 波無法穿越液態外核。大於約 103° 的區域缺少直接 S 波，支持外核為液態的解釋。',
+        cmb: '<strong>古氏不連續面 Gutenberg discontinuity</strong><br>古氏不連續面就是核心—地函邊界，深度約 2900 km。它的發現來自遠震走時與陰影帶：不是因為人類直接看見地核，而是因為震波在此界面發生速度突變、折射與相位消失。'
+      };
+      $('gutenbergText').innerHTML = data[key];
+    }
+
     document.addEventListener('DOMContentLoaded',()=>{
-      renderChapterFigures(); renderQuiz(); calcRefraction(); decodePhaseName(); updateAttenuation(); updateProgress();
+      renderChapterFigures(); renderQuiz(); calcRefraction(); decodePhaseName(); updateAttenuation(); updateProgress(); updateMohoPhase(); calcRayParameter(); calcAntipode(); updateAnisotropy(); updateAttenuationLab(); updateMantleDepth(); updateGutenberg();
       $('modalClose').addEventListener('click',()=>$('modal').classList.remove('open'));
       $('modal').addEventListener('click',e=>{ if(e.target.id==='modal') $('modal').classList.remove('open'); });
       $('calcRef').addEventListener('click',calcRefraction);
@@ -552,6 +734,22 @@
       $('checkQuiz').addEventListener('click',checkQuiz);
       $('themeBtn').addEventListener('click',()=>{ const dark=document.body.dataset.theme!=='dark'; document.body.dataset.theme=dark?'dark':'light'; $('themeBtn').textContent=dark?'淺色':'深色'; });
       $('velocityCases').addEventListener('click',e=>{ if(e.target.tagName!=='BUTTON')return; document.querySelectorAll('#velocityCases button').forEach(b=>b.classList.remove('active')); e.target.classList.add('active'); const cases={slow:'速度緩慢增加時，T(Δ) 連續且凹向下，p 隨距離增加而減小。這是最基本、最平滑的深部射線行為。',rapid:'速度快速增加時，射線會被快速彎回，造成 triplication：同一距離可能同時有三個相位分支，交會處常有高振幅 caustic。',low:'低速層會讓射線向下彎，造成某段距離沒有直接射線到達，也就是 shadow zone。核心陰影帶可以用這個概念理解。'}; $('caseText').textContent=cases[e.target.dataset.case]; });
+
+      if($('mohoPhaseTabs')) $('mohoPhaseTabs').addEventListener('click',e=>{ if(e.target.tagName!=='BUTTON') return; document.querySelectorAll('#mohoPhaseTabs button').forEach(b=>b.classList.remove('active')); e.target.classList.add('active'); updateMohoPhase(); });
+      if($('calcRayP')) $('calcRayP').addEventListener('click',calcRayParameter); ['dtRay','ddRay'].forEach(id=>{ if($(id)) $(id).addEventListener('input',calcRayParameter); });
+      if($('calcAntipode')) $('calcAntipode').addEventListener('click',calcAntipode); ['epiLat','epiLon'].forEach(id=>{ if($(id)) $(id).addEventListener('input',calcAntipode); });
+      if($('anisotropyMode')) $('anisotropyMode').addEventListener('click',e=>{ if(e.target.tagName!=='BUTTON') return; document.querySelectorAll('#anisotropyMode button').forEach(b=>b.classList.remove('active')); e.target.classList.add('active'); updateAnisotropy(); }); ['aniPercent','aniLength','aniVs'].forEach(id=>{ if($(id)) $(id).addEventListener('input',updateAnisotropy); });
+      if($('attenProcesses')) $('attenProcesses').addEventListener('click',e=>{ const card=e.target.closest('.process-card'); if(!card) return; card.classList.toggle('active'); updateAttenuationLab(); }); ['attDistance','attHetero','attFocus','qVal','fVal','tVal'].forEach(id=>{ if($(id)) $(id).addEventListener('input',updateAttenuationLab); });
+      if($('mantleDepth')) $('mantleDepth').addEventListener('input',updateMantleDepth); if($('mineralButtons')) $('mineralButtons').addEventListener('click',e=>{ if(e.target.tagName!=='BUTTON') return; $('mantleDepth').value=e.target.dataset.depth; updateMantleDepth(); });
+
+
+      if($('gutenbergTabs')) $('gutenbergTabs').addEventListener('click',e=>{ if(e.target.tagName!=='BUTTON') return; document.querySelectorAll('#gutenbergTabs button').forEach(b=>b.classList.remove('active')); e.target.classList.add('active'); updateGutenberg(); });
+      const recordFigure = figures.find(fig=>fig.id==='record');
+      if($('recordFigureWrap') && recordFigure){
+        $('recordFigureWrap').addEventListener('click',()=>openModal(recordFigure));
+        $('recordFigureWrap').addEventListener('keydown',e=>{ if(e.key==='Enter') openModal(recordFigure); });
+      }
+
       window.addEventListener('scroll',updateProgress,{passive:true});
     });
   </script>
