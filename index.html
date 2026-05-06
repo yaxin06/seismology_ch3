@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>地震學第三章｜地震學與地球構造互動式學習網頁</title>
+  <title>地震學第三章｜地震學與地球構造</title>
   <meta name="description" content="Seismology Chapter 3 interactive learning site: Seismology and Earth Structure, with refraction, reflection, spherical Earth rays, body-wave phases, anisotropy, attenuation, mantle-core composition, and record-section reading." />
   <style>
     :root{
@@ -180,11 +180,11 @@
       <div>
         <span class="eyebrow">第三章｜地震學與地球構造</span>
         <h1>用震波走時，看見地球內部</h1>
-        <p class="lead">這份互動式網頁把第三章整理成「概念 → 公式 → 圖像 → 操作」的學習路徑。重點不是背相位名稱，而是理解：震波為什麼轉彎、哪條路先到、走時曲線如何反推出地球構造。</p>
+        <p class="lead">本網站以地震學第三章「地震學與地球構造」為主題，依序介紹折射地震學、反射地震學、球形地球中的震波、體波走時研究、非均向性、衰減與地函核心組成，說明地震波觀測如何作為研究地球內部構造的重要依據。</p>
         <div class="hero-actions">
-          <a class="pill primary" href="#s31">開始學習</a>
-          <a class="pill secondary" href="#s32">依章節查看指定圖片</a>
-          <a class="pill" href="#quiz">章末小測</a>
+          <a class="pill primary" href="#s31">進入章節</a>
+          <a class="pill secondary" href="#s32">章節圖說</a>
+          <a class="pill" href="#quiz">章末複習</a>
         </div>
       </div>
       <div class="hero-visual" aria-label="地球內部震波示意">
@@ -246,7 +246,7 @@
         </div>
         <div class="calculator card soft" aria-label="折射走時計算器">
           <div>
-            <h3>互動：折射走時計算器</h3>
+            <h3>折射走時計算器</h3>
             <div class="input-row"><label>v0 上層速度 km/s</label><input id="v0" type="number" min="1" step="0.1" value="6.0"></div>
             <div class="input-row"><label>v1 下層速度 km/s</label><input id="v1" type="number" min="1" step="0.1" value="8.0"></div>
             <div class="input-row"><label>h0 上層厚度 km</label><input id="h0" type="number" min="0.1" step="0.5" value="30"></div>
@@ -260,7 +260,7 @@
       <div class="learning-panel card soft">
         <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0">
           <div>
-            <h3>新增互動：Pg、PmP、Pn 與莫氏不連續面</h3>
+            <h3>Pg、PmP、Pn 與莫氏不連續面</h3>
             <p class="small">同一張折射剖面中，Pg、PmP、Pn 分別對應直達、反射與首波。這三者的到時差，是理解 Moho 的關鍵。</p>
           </div>
           <span class="badge">Moho phases</span>
@@ -360,7 +360,7 @@
       </div>
 
       <div class="learning-panel card soft">
-        <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0"><div><h3>新增互動：射線參數 Ray Parameter 與地震對蹠點</h3><p class="small">球形地球中，射線參數 p 是理解震波路徑、走時曲線斜率與視速度的共同語言。</p></div><span class="badge">p = dT/dΔ</span></div>
+        <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0"><div><h3>射線參數（Ray Parameter）與地震對蹠點</h3><p class="small">本節說明球形地球中射線參數 p 的物理意義，並介紹震央正對面的對蹠點概念。</p></div><span class="badge">p = dT/dΔ</span></div>
         <div class="ray-param-lab">
           <div>
             <h4>Ray Parameter 怎麼讀？</h4>
@@ -382,7 +382,7 @@
       <div class="learning-panel card soft">
         <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0">
           <div>
-            <h3>新增互動：古氏不連續面與地震陰影帶</h3>
+            <h3>古氏不連續面與地震陰影帶</h3>
             <p class="small">古氏不連續面，也就是核心—地函邊界 CMB，並不是直接被看見，而是透過遠震走時與陰影帶推論出來。</p>
           </div>
           <span class="badge">Gutenberg discontinuity</span>
@@ -449,7 +449,7 @@
           </table>
         </div>
         <div class="card soft">
-          <h3>互動：相位名稱解碼</h3>
+          <h3>相位名稱解碼</h3>
           <div class="phase-input"><input id="phaseInput" value="PKIKP" aria-label="輸入相位名稱"><button id="decodePhase" class="primary" type="button">解碼</button></div>
           <div id="phaseOutput" class="phase-output"></div>
           <p class="small">試試看：ScS、PcP、pP、SKS、Pdiff、PKiKP。</p>
@@ -472,7 +472,7 @@
       </div>
 
       <div class="learning-panel card soft">
-        <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0"><div><h3>新增互動：S 波分裂與非均向來源</h3><p class="small">非均向性不只是名詞，而是可以被地震圖觀測到的時間差與偏振方向。</p></div><span class="badge">anisotropy lab</span></div>
+        <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0"><div><h3>S 波分裂與非均向來源</h3><p class="small">本節以 S 波分裂說明非均向性如何由到時差與偏振方向表現於地震紀錄中。</p></div><span class="badge">anisotropy</span></div>
         <div class="lab-grid"><div><h4>選擇非均向來源</h4><div class="mini-tabs" id="anisotropyMode"><button type="button" class="active" data-mode="iso">均向介質</button><button type="button" data-mode="spo">SPO 層狀構造</button><button type="button" data-mode="lpo">LPO 橄欖石排列</button><button type="button" data-mode="crack">裂隙／流體</button></div><div id="anisotropyText" class="result"></div><div class="range-row"><label>非均向強度 A（%）</label><input id="aniPercent" type="range" min="0" max="12" value="4" step="0.5"></div><div class="range-row"><label>路徑長度 L（km）</label><input id="aniLength" type="range" min="20" max="400" value="120" step="10"></div><div class="range-row"><label>平均 S 波速度 Vs（km/s）</label><input id="aniVs" type="range" min="3" max="5.5" value="4.2" step="0.1"></div><div id="splitResult" class="result"></div></div>
           <div class="split-sketch" aria-label="S wave splitting 示意"><svg viewBox="0 0 720 300"><rect x="0" y="0" width="720" height="300" fill="rgba(66,107,85,.08)"></rect><rect x="240" y="0" width="240" height="300" fill="rgba(178,107,56,.13)"></rect><text x="40" y="36" fill="currentColor">均向</text><text x="298" y="36" fill="currentColor">非均向區</text><text x="555" y="36" fill="currentColor">分裂後</text><line x1="30" y1="150" x2="690" y2="150" stroke="currentColor" stroke-width="2" opacity=".25"></line><path d="M40 150 C70 95 100 205 130 150 S190 95 220 150" stroke="#d9a24c" stroke-width="5" fill="none" stroke-linecap="round"></path><path id="fastPulse" d="M500 122 C530 70 560 174 590 122 S650 70 680 122" stroke="#92b99b" stroke-width="5" fill="none" stroke-linecap="round"></path><path id="slowPulse" d="M500 185 C530 132 560 236 590 185 S650 132 680 185" stroke="#e0a068" stroke-width="5" fill="none" stroke-linecap="round"></path><text x="505" y="105" fill="currentColor">Fast S1</text><text x="505" y="214" fill="currentColor">Slow S2</text><path d="M260 70 L460 230 M260 230 L460 70" stroke="currentColor" opacity=".18" stroke-width="8"></path></svg></div>
         </div>
@@ -494,7 +494,7 @@
           </ul>
         </div>
         <div class="card soft">
-          <h3>互動：Q 值與振幅</h3>
+          <h3>Q 值與振幅衰減</h3>
           <div class="input-row"><label>Q 值</label><input id="qVal" type="range" min="50" max="1000" value="250"></div>
           <div class="input-row"><label>頻率 f (Hz)</label><input id="fVal" type="range" min="0.1" max="5" value="1" step="0.1"></div>
           <div class="input-row"><label>傳播時間 t (s)</label><input id="tVal" type="range" min="10" max="400" value="120"></div>
@@ -503,7 +503,7 @@
       </div>
 
       <div class="learning-panel card soft">
-        <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0"><div><h3>新增互動：四種原因如何讓震波變弱？</h3><p class="small">振幅變小不一定等於能量被吸收。先分清楚「能量被重新分配」與「能量真的變成熱」。</p></div><span class="badge">attenuation lab</span></div>
+        <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0"><div><h3>震波振幅衰減的主要機制</h3><p class="small">本節區分幾何擴散、散射、多路徑與非彈性衰減，說明震波振幅隨傳播距離與介質性質改變的原因。</p></div><span class="badge">attenuation</span></div>
         <div class="process-grid" id="attenProcesses"><div class="process-card active" data-process="geo"><b>幾何擴散</b><span class="small">波前變大，單位面積能量下降。</span></div><div class="process-card active" data-process="scat"><b>散射</b><span class="small">小尺度不均質造成 coda。</span></div><div class="process-card active" data-process="multi"><b>多路徑</b><span class="small">速度透鏡造成聚焦或散焦。</span></div><div class="process-card active" data-process="anel"><b>非彈性</b><span class="small">震波能量轉為熱，真正耗散。</span></div></div>
         <div class="lab-grid" style="margin-top:16px"><div><div class="atten-lab-controls"><div><label class="small">距離 r（km）</label><input id="attDistance" type="range" min="50" max="1200" value="300" step="10"></div><div><label class="small">不均質程度</label><input id="attHetero" type="range" min="0" max="100" value="35" step="1"></div><div><label class="small">聚焦/散焦</label><input id="attFocus" type="range" min="-50" max="50" value="-10" step="1"></div></div><div class="ampbar"><span id="ampBar"></span></div><div id="attenLabResult" class="result"></div></div>
           <div class="atten-sketch" aria-label="衰減概念示意"><svg viewBox="0 0 720 300"><rect x="0" y="0" width="720" height="300" fill="rgba(66,107,85,.08)"></rect><circle cx="90" cy="150" r="12" fill="var(--accent3)"></circle><text x="52" y="132" fill="currentColor">震源</text><circle cx="90" cy="150" r="55" fill="none" stroke="currentColor" opacity=".18" stroke-width="3"></circle><circle cx="90" cy="150" r="105" fill="none" stroke="currentColor" opacity=".14" stroke-width="3"></circle><circle cx="90" cy="150" r="155" fill="none" stroke="currentColor" opacity=".10" stroke-width="3"></circle><path id="attenWave" d="M210 150 C235 80 260 220 285 150 S335 80 360 150 S410 80 435 150 S485 80 510 150 S560 80 585 150 S635 80 660 150" stroke="#d9a24c" stroke-width="6" fill="none" stroke-linecap="round"></path><g opacity=".58"><circle cx="330" cy="95" r="5" fill="var(--accent2)"></circle><circle cx="405" cy="210" r="4" fill="var(--accent2)"></circle><circle cx="520" cy="96" r="6" fill="var(--accent2)"></circle><circle cx="600" cy="220" r="5" fill="var(--accent2)"></circle></g><text x="300" y="36" fill="currentColor">擴散 + 散射 + 多路徑 + 非彈性</text></svg></div>
@@ -535,9 +535,9 @@
 
       </div>
       <div class="learning-panel card soft">
-        <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0"><div><h3>新增互動：410、520、660 km 不連續面與地函礦物相變</h3><p class="small">地函不是單純「越深越快」，速度突增常與礦物晶體結構改變、密度增加有關。</p></div><span class="badge">mantle transition zone</span></div>
+        <div class="section-head" style="border-bottom:0;margin-bottom:6px;padding-bottom:0"><div><h3>410、520、660 km 不連續面與地函礦物相變</h3><p class="small">本節說明地函轉換帶中橄欖石系列礦物的高壓相變，並連結其對地震波速度不連續面的影響。</p></div><span class="badge">mantle transition zone</span></div>
         <div class="mantle-model"><div class="mantle-column" aria-label="地函轉換帶深度示意"><div id="depthPointer" class="depth-pointer"></div><div class="layer l410">410 km：橄欖石 → Wadsleyite</div><div class="layer l520">520 km：Wadsleyite → Ringwoodite</div><div class="layer l660">660 km：Ringwoodite → Bridgmanite + Periclase</div></div>
-          <div><h4>互動：拖曳深度或直接點選不連續面</h4><div class="range-row"><label>深度（km）</label><input id="mantleDepth" type="range" min="0" max="700" value="410" step="5"></div><div class="mineral-buttons" id="mineralButtons"><button type="button" class="active" data-depth="410">410 km</button><button type="button" data-depth="520">520 km</button><button type="button" data-depth="660">660 km</button></div><div id="mantleResult" class="result"></div><div class="composition-grid"><div class="composition-card"><b>上地函</b><p class="small">以橄欖石、輝石、石榴子石等矽酸鹽礦物為主，速度受溫度、壓力與礦物排列影響。</p></div><div class="composition-card"><b>外核</b><p class="small">液態鐵鎳合金並含較輕元素；S 波速度為 0，是判斷液態外核的重要證據。</p></div><div class="composition-card"><b>內核</b><p class="small">固態鐵鎳合金，因高壓保持固態；可傳有限 S 波，且可能具有非均向性。</p></div></div></div>
+          <div><h4>深度滑桿與不連續面判讀</h4><div class="range-row"><label>深度（km）</label><input id="mantleDepth" type="range" min="0" max="700" value="410" step="5"></div><div class="mineral-buttons" id="mineralButtons"><button type="button" class="active" data-depth="410">410 km</button><button type="button" data-depth="520">520 km</button><button type="button" data-depth="660">660 km</button></div><div id="mantleResult" class="result"></div><div class="composition-grid"><div class="composition-card"><b>上地函</b><p class="small">以橄欖石、輝石、石榴子石等矽酸鹽礦物為主，速度受溫度、壓力與礦物排列影響。</p></div><div class="composition-card"><b>外核</b><p class="small">液態鐵鎳合金並含較輕元素；S 波速度為 0，是判斷液態外核的重要證據。</p></div><div class="composition-card"><b>內核</b><p class="small">固態鐵鎳合金，因高壓保持固態；可傳有限 S 波，且可能具有非均向性。</p></div></div></div>
         </div>
       </div>
     </section>
